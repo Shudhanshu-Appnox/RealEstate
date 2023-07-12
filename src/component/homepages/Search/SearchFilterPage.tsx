@@ -34,7 +34,7 @@ const SearchFilterPage = ({route}: any) => {
   const [bgColor2, setbgColor2] = useState(false);
   const [sliderValue, setSliderValue] = useState(10);
   const [onPress, setOnPress] = useState(true);
-  const [selectedId, setSelectedId] = useState();
+  const [selectedId, setSelectedId] = useState('');
   const [bedrooms, setBedrooms] = useState(false);
   const {cityName} = useSelector((store: any) => store.filter);
   const [yes, setYes] = useState(false);
@@ -47,9 +47,7 @@ const SearchFilterPage = ({route}: any) => {
     dispatch(UpdateCityName(''));
   };
 
-  const handlePress = () => {
-    return setBedrooms(!bedrooms);
-  };
+ 
   const handleSubmit = () => {
     return setbgColor(!bgColor);
   };
@@ -81,9 +79,9 @@ const SearchFilterPage = ({route}: any) => {
 
   const Item = ({item}: any) => {
     return (
-      <TouchableOpacity onPress={() => handlePress()}>
-        <View style={bedrooms ? styles.afterClickOnItem : styles.item}>
-          {bedrooms ? (
+      <TouchableOpacity onPress={() => {setSelectedId(item.id), setBedrooms(true)}}>
+        <View style={selectedId === item.id && bedrooms ? styles.afterClickOnItem : styles.item}>
+          {selectedId === item.id && bedrooms ? (
             <Ionicons style={styles.addFont} name={'checkmark'} />
           ) : (
             <Ionicons style={styles.addFont} name={'add'} />

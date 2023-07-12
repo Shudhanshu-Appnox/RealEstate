@@ -58,21 +58,8 @@ export default function UnAuthRoutes() {
         component={RegisterWithOTP}
         options={{headerShown: false}}
       />
-      <Stack.Screen
-        name="FeaturedEstate"
-        component={FeaturedEstate}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="TopDicount"
-        component={TopDicount}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="Villa"
-        component={Villa}
-        options={{headerShown: false}}
-      />
+      
+      
     </Stack.Navigator>
   );
 }

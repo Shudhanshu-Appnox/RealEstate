@@ -19,6 +19,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {SearchPropertyService} from '../../services/properties';
+import { useNavigation } from '@react-navigation/native';
 
 const CategoryEstate: React.FC<any> = ({cityName}) => {
   const heartImage = require('../../../assets/images/Heart.png');
@@ -26,6 +27,7 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
   const locationImage = require('../../../assets/images/Location.png');
   const mainImage = require('../../../assets/images/image26.png');
   const [cityData, setCityData] = useState([]);
+  const navigation = useNavigation();
   const GetPropertyData = async () => {
     try {
       const res = await SearchPropertyService(cityName);
@@ -47,8 +49,8 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
   type ItemProps = {image: string};
 
   const Item = ({data}: any) => (
-    <TouchableOpacity>
-      <TouchableOpacity style={styles.container}>
+   
+      <TouchableOpacity onPress={() => navigation.navigate('DetailedPage' as never, {data})} style={styles.container}>
         <View style={styles.featuredCard}>
           <ImageBackground style={styles.imageContainer} source={mainImage}>
             <TouchableOpacity style={styles.heartContainer}>
@@ -75,7 +77,6 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
           </View>
         </View>
       </TouchableOpacity>
-    </TouchableOpacity>
   );
 
   return (

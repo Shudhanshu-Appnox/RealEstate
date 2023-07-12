@@ -48,11 +48,11 @@ const HomePage = () => {
               </TouchableOpacity>
 
               <View style={styles.profileContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Notification' as never)}>
                   <Image style={styles.notification} source={notificationImg} />
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Profile' as never)}>
                   <Image style={styles.profile} source={ellipseImg} />
                 </TouchableOpacity>
               </View>
@@ -70,7 +70,7 @@ const HomePage = () => {
             style={styles.serchContainer}>
             <Text>
               <Text style={{fontWeight: 'bold'}}>Search </Text>City, Locality,
-              Project, Landmar
+              Project, Landmark
             </Text>
             <Image source={searchImg} />
           </TouchableOpacity>

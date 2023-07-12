@@ -40,8 +40,6 @@ const useAuthServiceHandler = () => {
         dispatch(UpdateIsLoginState(true));
         Navigation.navigate('HomePage' as never);
       }
-      dispatch(UpdateIsLoginState(true));
-      Navigation.navigate('HomePage' as never);
     } catch (error: any) {
        console.log('error');
        

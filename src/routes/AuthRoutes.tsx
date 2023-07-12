@@ -12,6 +12,9 @@ import ListOfProperty from '../component/homepages/Search/ListOfProperty/ListOfP
 import SearchFilterPage from '../component/homepages/Search/SearchFilterPage';
 import HomePage from '../screens/homepage/HomePage';
 import AddCityName from '../component/homepages/Modal/AddCityName';
+import DetailedPage from '../component/homepages/Search/DetailedPage';
+import Notification from '../screens/profile/Notification';
+import Profile from '../screens/profile/Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,8 +27,18 @@ const AuthRoute = () => {
         options={{headerShown: false, animation: 'slide_from_bottom'}}
       />
       <Stack.Screen
-        name="BottomNavigation"
+        name="BottomTabNavigation"
         component={BottomTabNavigation}
+        options={{headerShown: false, animation: 'slide_from_bottom'}}
+      />
+      <Stack.Screen
+        name="Notification"
+        component={Notification}
+        options={{headerShown: false, animation: 'slide_from_bottom'}}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
         options={{headerShown: false, animation: 'slide_from_bottom'}}
       />
       <Stack.Screen
@@ -76,6 +89,11 @@ const AuthRoute = () => {
       <Stack.Screen
         name="AddCityName"
         component={AddCityName}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="DetailedPage"
+        component={DetailedPage}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

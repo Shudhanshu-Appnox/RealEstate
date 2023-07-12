@@ -22,17 +22,10 @@ export default function Profile() {
         <TouchableOpacity style={styles.profileContainer}>
           <Image style={styles.profileImg} source={profileImg} />
         </TouchableOpacity>
-        <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity>
-            <Text style={styles.textAuth}>Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.textAuth}> / Register</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={{textAlign: 'center'}}>
-          Login and access millions of advertiser {'\n'} details on single click
-        </Text>
+        
+        <Text style={styles.headerText}>
+            Welcome,<Text style={styles.subText}> John ! </Text>
+          </Text>
         <View style={styles.button__}>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.btnText}>Logout</Text>
@@ -75,4 +68,10 @@ const styles = StyleSheet.create({
   },
 
   btnText: {color: 'white', fontSize: 16, textAlign: 'center'},
+  headerText: {
+    fontSize: responsiveFontSize(4),
+  },
+  subText: {
+    color: '#234F68',
+  },
 });
