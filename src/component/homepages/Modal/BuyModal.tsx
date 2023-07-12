@@ -14,13 +14,13 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import ExploreButton from '../../common/buttons/ExploreButton';
-const searchImg = require('../../../../assets/images/Search.png');
-const vector1mg = require('../../../../assets/images/Vector1.png');
 import {useNavigation} from '@react-navigation/native';
 import SearchModal from './SearchModal';
-import { white } from '../../../../assets/Styles/GlobalTheme';
+import {white} from '../../../../assets/Styles/GlobalTheme';
 
 const BuyModal: React.FC<any> = ({setModalOpen}) => {
+  const searchImg = require('../../../../assets/images/Search.png');
+  const vector1mg = require('../../../../assets/images/Vector1.png');
   const [text, setText] = useState(false);
   const [title, setTitle] = useState('Buy');
   const [purposeOfBuying, setPurposeOfBuying] = useState('Residential use');
@@ -120,7 +120,9 @@ const BuyModal: React.FC<any> = ({setModalOpen}) => {
 
             <Image source={searchImg} />
           </TouchableOpacity>
-          {cityError ?( <Text style={{color: 'red', textAlign: 'right'}}>{cityError}</Text>): null}
+          {cityError ? (
+            <Text style={{color: 'red', textAlign: 'right'}}>{cityError}</Text>
+          ) : null}
         </View>
         <ExploreButton title="Explore" onPress={() => handleSubmit()} />
       </View>

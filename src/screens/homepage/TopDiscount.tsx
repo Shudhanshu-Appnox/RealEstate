@@ -1,6 +1,16 @@
 import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, TouchableOpacity, ImageBackground, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {
+  SafeAreaView,
+  View,
+  FlatList,
+  StyleSheet,
+  Text,
+  StatusBar,
+  TouchableOpacity,
+  ImageBackground,
+  Image,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -9,88 +19,83 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-
-const DATA = [
-  {
-    id: '1',
-    title: 'Halloween Sale!',
-    rating: '4.9',
-    image: require('../../../assets/images/image25.png'),
-    secondTitle: 'All discount up to 60%',
-    price: '$226',
-    location: 'Jakarta, Indonesia',
-    buttonTitle: 'Apartment',
-  },
-  {
-    id: '2',
-    title: 'The laurels Villa',
-    rating: '4.9',
-    image: require('../../../assets/images/image25.png'),
-    secondTitle: 'All discount up to 60%',
-    price: '$300',
-    location: 'Bali, Indonesia',
-    buttonTitle: 'Villa',
-  },
-  {
-    id: '3',
-    title: 'Halloween Sale!',
-    rating: '4.9',
-    image: require('../../../assets/images/image25.png'),
-    secondTitle: 'All discount up to 60%',
-    price: '$226',
-    location: 'Jakarta, Indonesia',
-    buttonTitle: 'Apartment',
-  },
-  {
-    id: '4',
-    title: 'The laurels Villa',
-    rating: '4.9',
-    image: require('../../../assets/images/image25.png'),
-    secondTitle: 'All discount up to 60%',
-    price: '$300',
-    location: 'Bali, Indonesia',
-    buttonTitle: 'Villa',
-  },
-  {
-    id: '5',
-    title: 'Halloween Sale!',
-    rating: '4.9',
-    image: require('../../../assets/images/image25.png'),
-    secondTitle: 'All discount up to 60%',
-    price: '$226',
-    location: 'Jakarta, Indonesia',
-    buttonTitle: 'Apartment',
-  },
-  {
-    id: '6',
-    title: 'The laurels Villa',
-    rating: '4.9',
-    image: require('../../../assets/images/image25.png'),
-    secondTitle: 'All discount up to 60%',
-    price: '$300',
-    location: 'Bali, Indonesia',
-    buttonTitle: 'Villa',
-  },
-];
-
-
-// type ItemProps = {image: string};
 const TopDiscount = () => {
   const Navigation = useNavigation();
+  const DATA = [
+    {
+      id: '1',
+      title: 'Halloween Sale!',
+      rating: '4.9',
+      image: require('../../../assets/images/image25.png'),
+      secondTitle: 'All discount up to 60%',
+      price: '$226',
+      location: 'Jakarta, Indonesia',
+      buttonTitle: 'Apartment',
+    },
+    {
+      id: '2',
+      title: 'The laurels Villa',
+      rating: '4.9',
+      image: require('../../../assets/images/image25.png'),
+      secondTitle: 'All discount up to 60%',
+      price: '$300',
+      location: 'Bali, Indonesia',
+      buttonTitle: 'Villa',
+    },
+    {
+      id: '3',
+      title: 'Halloween Sale!',
+      rating: '4.9',
+      image: require('../../../assets/images/image25.png'),
+      secondTitle: 'All discount up to 60%',
+      price: '$226',
+      location: 'Jakarta, Indonesia',
+      buttonTitle: 'Apartment',
+    },
+    {
+      id: '4',
+      title: 'The laurels Villa',
+      rating: '4.9',
+      image: require('../../../assets/images/image25.png'),
+      secondTitle: 'All discount up to 60%',
+      price: '$300',
+      location: 'Bali, Indonesia',
+      buttonTitle: 'Villa',
+    },
+    {
+      id: '5',
+      title: 'Halloween Sale!',
+      rating: '4.9',
+      image: require('../../../assets/images/image25.png'),
+      secondTitle: 'All discount up to 60%',
+      price: '$226',
+      location: 'Jakarta, Indonesia',
+      buttonTitle: 'Apartment',
+    },
+    {
+      id: '6',
+      title: 'The laurels Villa',
+      rating: '4.9',
+      image: require('../../../assets/images/image25.png'),
+      secondTitle: 'All discount up to 60%',
+      price: '$300',
+      location: 'Bali, Indonesia',
+      buttonTitle: 'Villa',
+    },
+  ];
 
-const Item = ({data} :any) => (
-  
-  
-  <TouchableOpacity onPress={() => Navigation.navigate('Villa' as never)}>
-    <View style={styles.featuredCard}>
-    <ImageBackground style={styles.imageContainer} source={data.image}>
-      <Text style={styles.buttonText}>{data.buttonTitle}</Text>
-      <Text style={styles.secondTitle}>{data.secondTitle}</Text>
-    </ImageBackground>
-    </View>
-  </TouchableOpacity>
-);
+  // type ItemProps = {image: string};
 
+  const Item = ({data}: any) => (
+    <TouchableOpacity onPress={() => Navigation.navigate('Villa' as never)}>
+      <View style={styles.featuredCard}>
+        <ImageBackground style={styles.imageContainer} source={data.image}>
+          <Text style={styles.buttonText}>{data.buttonTitle}</Text>
+          <Text style={styles.secondTitle}>{data.secondTitle}</Text>
+        </ImageBackground>
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -106,18 +111,14 @@ const Item = ({data} :any) => (
 };
 
 const styles = StyleSheet.create({
-    container: {
-        
-    },
-    featuredContainer: {
-      borderRadius: responsiveWidth(5)
-    },
+  container: {},
+  featuredContainer: {
+    borderRadius: responsiveWidth(5),
+  },
   featuredCard: {
-   
     flexDirection: 'row',
 
     padding: responsiveScreenWidth(3),
-    
   },
 
   imageContainer: {
@@ -133,12 +134,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     paddingVertical: responsiveScreenHeight(2),
-    paddingHorizontal: responsiveScreenWidth(2)
+    paddingHorizontal: responsiveScreenWidth(2),
   },
   secondTitle: {
     color: '#ffffff',
     paddingVertical: responsiveScreenHeight(2),
-    paddingHorizontal: responsiveScreenWidth(2)
+    paddingHorizontal: responsiveScreenWidth(2),
   },
 });
 

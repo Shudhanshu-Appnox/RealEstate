@@ -15,11 +15,12 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import ExploreButton from '../../common/buttons/ExploreButton';
-const searchImg = require('../../../../assets/images/Search.png');
-const vectorImg = require('../../../../assets/images/Vector1.png');
+
 import {useNavigation} from '@react-navigation/native';
 
 const BuyPlotLand: React.FC<any> = ({setModalOpen}) => {
+  const searchImg = require('../../../../assets/images/Search.png');
+  const vectorImg = require('../../../../assets/images/Vector1.png');
   const [text, setText] = useState(false);
   const [cityName, setCityName] = useState('');
   const [cityError, setCityError] = useState('');

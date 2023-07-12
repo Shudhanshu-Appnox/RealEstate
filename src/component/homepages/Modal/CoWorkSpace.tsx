@@ -13,11 +13,11 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import ExploreButton from '../../common/buttons/ExploreButton';
-const searchImg = require('../../../../assets/images/Search.png');
-const vector1mg = require('../../../../assets/images/Vector1.png');
 import {useNavigation} from '@react-navigation/native';
 
 const BuyPlotLand: React.FC<any> = ({setModalOpen}) => {
+  const searchImg = require('../../../../assets/images/Search.png');
+  const vector1mg = require('../../../../assets/images/Vector1.png');
   const [cityName, setCityName] = useState('');
   const [title, setTitle] = useState('Co-working Space');
   const [cityError, setCityError] = useState('');

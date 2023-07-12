@@ -7,11 +7,15 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import {responsiveFontSize, responsiveHeight, responsiveScreenHeight, responsiveScreenWidth} from 'react-native-responsive-dimensions';
-
-const profileImg = require('../../../assets/images/Ellipse.png');
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from 'react-native-responsive-dimensions';
 
 export default function Profile() {
+  const profileImg = require('../../../assets/images/Ellipse.png');
   return (
     <SafeAreaView style={styles.safearea}>
       <View style={styles.container}>
@@ -30,9 +34,7 @@ export default function Profile() {
           Login and access millions of advertiser {'\n'} details on single click
         </Text>
         <View style={styles.button__}>
-          <TouchableOpacity
-            style={styles.button}
-            >
+          <TouchableOpacity style={styles.button}>
             <Text style={styles.btnText}>Logout</Text>
           </TouchableOpacity>
         </View>
@@ -49,17 +51,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    gap: responsiveHeight(2)
+    gap: responsiveHeight(2),
   },
-  profileContainer: {
-
-  },
-  profileImg: {
-    
-  },
-  textAuth:{
+  profileContainer: {},
+  profileImg: {},
+  textAuth: {
     color: '#234F68',
-    fontSize: responsiveFontSize(3)
+    fontSize: responsiveFontSize(3),
   },
   button: {
     padding: 10,

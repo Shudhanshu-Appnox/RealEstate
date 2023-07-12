@@ -6,10 +6,12 @@ import TopDiscount from '../screens/homepage/TopDiscount';
 import Villa from '../screens/discover/Category/Villa';
 import TopLocation from '../screens/discover/Category/TopLocation';
 import TopEstateAgent from '../screens/discover/Category/TopEstateAgent';
-import TopLocationPage from '../screens/discover/Category/TopLocationPage'
-import LocationDetails from '../screens/discover/Category/LocationDetails'
+import TopLocationPage from '../screens/discover/Category/TopLocationPage';
+import LocationDetails from '../screens/discover/Category/LocationDetails';
 import ListOfProperty from '../component/homepages/Search/ListOfProperty/ListOfProperty';
 import SearchFilterPage from '../component/homepages/Search/SearchFilterPage';
+import HomePage from '../screens/homepage/HomePage';
+import AddCityName from '../component/homepages/Modal/AddCityName';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,11 +19,16 @@ const AuthRoute = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
+        name="HomePage"
+        component={HomePage}
+        options={{headerShown: false, animation: 'slide_from_bottom'}}
+      />
+      <Stack.Screen
         name="BottomNavigation"
         component={BottomTabNavigation}
         options={{headerShown: false, animation: 'slide_from_bottom'}}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="FeaturedEstate"
         component={FeaturedEstate}
         options={{headerShown: false}}
@@ -61,11 +68,16 @@ const AuthRoute = () => {
         component={ListOfProperty}
         options={{headerShown: false}}
       />
-       <Stack.Screen 
-      name='SearchFilterPage'
-      component={SearchFilterPage}
-      options={{headerShown: false}}
-    />
+      <Stack.Screen
+        name="SearchFilterPage"
+        component={SearchFilterPage}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="AddCityName"
+        component={AddCityName}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };

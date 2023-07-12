@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -18,84 +18,71 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {SearchPropertyService} from '../../services/properties';
 
-import FeaturedButton from '../../component/common/buttons/FeaturedButton';
-import { SearchPropertyService } from '../../services/properties';
-const heartImage = require('../../../assets/images/Heart.png')
-const starImage = require('../../../assets/images/Star.png')
-const locationImage = require('../../../assets/images/Location.png');
-const mainImage =  require('../../../assets/images/image26.png');
-
-
-
-
-type ItemProps = {image: string};
-
-const Item = ({data} : any) => (
-  <TouchableOpacity>
-    <TouchableOpacity style={styles.container}>
-      <View style={styles.featuredCard}>
-        <ImageBackground style={styles.imageContainer} source={mainImage}>
-          <TouchableOpacity style={styles.heartContainer}>
-          <Image style={styles.heart} source={heartImage} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>
-              {data.price}
-              <Text style={{fontSize: 8}}>/Month</Text>
-            </Text>
-          </TouchableOpacity>
-        </ImageBackground>
-
-        <View style={styles.details}>
-          <View style={styles.detailsHeader}>
-            <Text style={styles.detailesHeadertext}>{data.title}</Text>
-            <View style={styles.ratingContainer}>
-              <Image
-                style={styles.star}
-                source={starImage}
-              />
-              <Text style={{fontSize: 10}}>{data.rating}</Text>
-              <Image
-                style={styles.star}
-                source={locationImage}
-              />
-              <Text style={{fontSize: 10}}>{data.location}</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-    </TouchableOpacity>
-  </TouchableOpacity>
-);
-
-const CategoryEstate:React.FC<any> = ({cityName}) => {
+const CategoryEstate: React.FC<any> = ({cityName}) => {
+  const heartImage = require('../../../assets/images/Heart.png');
+  const starImage = require('../../../assets/images/Star.png');
+  const locationImage = require('../../../assets/images/Location.png');
+  const mainImage = require('../../../assets/images/image26.png');
   const [cityData, setCityData] = useState([]);
-  const GetPropertyData = async() => {
-     try {
+  const GetPropertyData = async () => {
+    try {
       const res = await SearchPropertyService(cityName);
       const {result} = res.data;
-      if(result.rows){
+      if (result.rows) {
         setCityData(result.rows);
-      }else {
+      } else {
         setCityData([]);
       }
-     } catch (error) {
-       Alert.alert('', 'Error')
-     }
+    } catch (error) {
+      Alert.alert('', 'Error');
+    }
   };
 
   useEffect(() => {
     GetPropertyData();
   }, []);
 
+  type ItemProps = {image: string};
+
+  const Item = ({data}: any) => (
+    <TouchableOpacity>
+      <TouchableOpacity style={styles.container}>
+        <View style={styles.featuredCard}>
+          <ImageBackground style={styles.imageContainer} source={mainImage}>
+            <TouchableOpacity style={styles.heartContainer}>
+              <Image style={styles.heart} source={heartImage} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>
+                {data.price}
+                <Text style={{fontSize: 8}}>/Month</Text>
+              </Text>
+            </TouchableOpacity>
+          </ImageBackground>
+
+          <View style={styles.details}>
+            <View style={styles.detailsHeader}>
+              <Text style={styles.detailesHeadertext}>{data.title}</Text>
+              <View style={styles.ratingContainer}>
+                <Image style={styles.star} source={starImage} />
+                <Text style={{fontSize: 10}}>{data.rating}</Text>
+                <Image style={styles.star} source={locationImage} />
+                <Text style={{fontSize: 10}}>{data.location}</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    </TouchableOpacity>
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        style={{flex: 1}}
-        horizontal={false}
-        numColumns={2}
-        showsVerticalScrollIndicator={false}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
         data={cityData}
         renderItem={({item}) => <Item data={item} />}
         keyExtractor={item => item.id}
@@ -124,7 +111,7 @@ const styles = StyleSheet.create({
     height: responsiveHeight(20),
     gap: responsiveHeight(9.5),
     paddingRight: responsiveScreenWidth(1.5),
-    paddingTop: responsiveScreenHeight(1)
+    paddingTop: responsiveScreenHeight(1),
   },
   heartContainer: {
     alignItems: 'center',
@@ -140,10 +127,10 @@ const styles = StyleSheet.create({
   },
   button: {
     width: responsiveWidth(22),
-     padding: responsiveScreenWidth(2),
+    padding: responsiveScreenWidth(2),
     backgroundColor: '#234F68',
     borderRadius: 8,
-   
+
     // padding: responsiveHeight(2),
   },
   details: {
