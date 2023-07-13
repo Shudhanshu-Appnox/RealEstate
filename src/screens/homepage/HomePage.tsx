@@ -36,7 +36,7 @@ const HomePage = () => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} >
         <View style={styles.container}>
           <View style={styles.header}>
             <View style={styles.headerItems}>
@@ -100,12 +100,12 @@ const HomePage = () => {
             </TouchableOpacity>
           </View>
           <TopLocation />
-          {/* <Text style={{color: '#252B5C', fontSize: 18, fontWeight: 'bold'}}>
+          <Text style={{color: '#252B5C', fontSize: 18, fontWeight: 'bold'}}>
             Explore Nearby Estate
-          </Text> */}
-          {/* <View style={styles.dataListContainer}>
+          </Text>
+          <View style={styles.dataListContainer}>
             <ExploreNearbyEstate />
-          </View> */}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -124,10 +124,12 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: 'white',
+    
   },
 
   container: {
     paddingHorizontal: responsiveScreenWidth(4),
+    paddingVertical: responsiveScreenHeight(1.8),
     gap: responsiveHeight(4),
   },
   header: {

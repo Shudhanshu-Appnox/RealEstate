@@ -99,7 +99,8 @@ const TopDiscount = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
+      <FlatList 
+      scrollEnabled={false}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={DATA}

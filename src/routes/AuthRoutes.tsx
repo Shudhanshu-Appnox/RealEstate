@@ -21,16 +21,13 @@ const Stack = createNativeStackNavigator();
 const AuthRoute = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="HomePage"
-        component={HomePage}
-        options={{headerShown: false, animation: 'slide_from_bottom'}}
-      />
-      <Stack.Screen
+       <Stack.Screen
         name="BottomTabNavigation"
         component={BottomTabNavigation}
         options={{headerShown: false, animation: 'slide_from_bottom'}}
       />
+      
+     
       <Stack.Screen
         name="Notification"
         component={Notification}

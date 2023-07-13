@@ -24,3 +24,8 @@ export const RegisterService = async (data: any) => {
   const url = `${URL}user/create`;
   return axios.post(url, data);
 };
+
+export const LogoutService = async (data: any) => {
+  const url = `${URL}user/logout`;
+  return axios.post(url, data);
+};

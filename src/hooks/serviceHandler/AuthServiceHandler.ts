@@ -4,6 +4,7 @@ import {
   GenerateOTPService,
   VerifyOTPService,
   RegisterService,
+  LogoutService,
 } from '../../services/auth/authService';
 import { useDispatch } from 'react-redux';
 import { UpdateIsLoginState } from '../../redux/reducers/userReducer';
@@ -38,7 +39,8 @@ const useAuthServiceHandler = () => {
         Navigation.navigate('Register' as never);
       } else {
         dispatch(UpdateIsLoginState(true));
-        Navigation.navigate('HomePage' as never);
+        Navigation.navigate('BottomTabNavigation' as never);
+        console.log(result)
       }
     } catch (error: any) {
        console.log('error');
@@ -52,7 +54,19 @@ const useAuthServiceHandler = () => {
       dispatch(SetIsLoadingState(true));
       const {result} = res.data;
       console.log(result);
-      Navigation.navigate('HomePage' as never);
+      Navigation.navigate('BottomTabNavigation' as never);
+    } catch (error: any) {
+      Alert.alert('Error', error.response.data.errors.message);
+    }
+  };
+
+  const handleLogoutService = async (data: any) => {
+    try {
+      const res = await LogoutService(data);
+      dispatch(SetIsLoadingState(false));
+      const {result} = res.data;
+      console.log(result);
+      Navigation.navigate('SplashScreen' as never);
     } catch (error: any) {
       Alert.alert('Error', error.response.data.errors.message);
     }
@@ -62,6 +76,7 @@ const useAuthServiceHandler = () => {
     GenerateOtpServiceHandler,
     VerifyOTPServiceHandler,
     handleRegisterService,
+    handleLogoutService,
   };
 };
 

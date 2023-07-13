@@ -1,4 +1,5 @@
 const initialState = {
+
   isLogin: false,
   userDetails: {},
 };
@@ -7,8 +8,12 @@ interface setIsLogin {
   type: 'UPDATE_IS_LOGIN';
   payload: boolean;
 }
+interface setIsLogout {
+  type: 'UPDATE_LOGOUT';
+  payload: boolean;
+}
 
-type action = setIsLogin;
+type action = setIsLogin | setIsLogout
 
 const UserReducer = (state = initialState, action: action) => {
   switch (action.type) {
@@ -18,6 +23,14 @@ const UserReducer = (state = initialState, action: action) => {
         isLogin: action.payload,
       };
     }
+    case 'UPDATE_LOGOUT':  {
+      return {
+        ...state,
+        isLogin: false,
+        userDetails: null,
+      };
+    }
+      
 
     default:
       return state;
@@ -30,5 +43,12 @@ export const UpdateIsLoginState = (state: boolean) => {
   return {
     type: 'UPDATE_IS_LOGIN',
     payload: state,
+  };
+};
+
+
+export const UpdateLogout = () => {
+  return {
+    type: 'UPDATE_LOGOUT',
   };
 };

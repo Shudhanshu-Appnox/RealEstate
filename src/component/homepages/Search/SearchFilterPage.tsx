@@ -95,7 +95,7 @@ const SearchFilterPage = ({route}: any) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{marginHorizontal: responsiveScreenWidth(2.5)}}>
+        <View style={{marginHorizontal: responsiveScreenWidth(2.5), marginVertical: responsiveScreenHeight(1.7)}}>
           <HeaderWithBackBtn />
         </View>
         <View style={styles.main}>

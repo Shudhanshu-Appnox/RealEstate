@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   View,
-  FlatList,
+  VirtualizedList,
   StyleSheet,
   Text,
   StatusBar,
@@ -31,7 +31,9 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
   const GetPropertyData = async () => {
     try {
       const res = await SearchPropertyService(cityName);
+      
       const {result} = res.data;
+      
       if (result.rows) {
         setCityData(result.rows);
       } else {
@@ -46,7 +48,18 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
     GetPropertyData();
   }, []);
 
+  type ItemData = {
+    id: string;
+    title: string;
+  };
+  
+  const getItem = (_data: unknown, index: number): ItemData => ({
+    id: Math.random().toString(12).substring(0),
+    title: `Item ${index + 1}`,
+  });
+
   type ItemProps = {image: string};
+  const getItemCount = () => 1;
 
   const Item = ({data}: any) => (
    
@@ -81,13 +94,14 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
+     
+      <VirtualizedList
+      showsVerticalScrollIndicator={false}
         data={cityData}
         renderItem={({item}) => <Item data={item} />}
         keyExtractor={item => item.id}
-        key={'_'}
+        getItemCount={getItemCount}
+        getItem={getItem}
       />
     </SafeAreaView>
   );
@@ -100,7 +114,7 @@ const styles = StyleSheet.create({
   },
 
   featuredCard: {
-    width: responsiveWidth(44),
+    flexDirection: 'row',
     borderRadius: 40,
     backgroundColor: '#F5F4F8',
     padding: responsiveScreenWidth(1.5),
