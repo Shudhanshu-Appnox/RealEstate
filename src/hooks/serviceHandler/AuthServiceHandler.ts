@@ -39,11 +39,11 @@ const useAuthServiceHandler = () => {
         Navigation.navigate('Register' as never);
       } else {
         dispatch(UpdateIsLoginState(true));
-        Navigation.navigate('BottomTabNavigation' as never);
+        Navigation.navigate('BottomTabNavigation' as never, {result });
         console.log(result)
       }
     } catch (error: any) {
-       console.log('error');
+      Alert.alert('Wrong OTP')
        
     }
   };

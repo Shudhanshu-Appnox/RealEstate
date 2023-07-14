@@ -29,7 +29,6 @@ const AuthRoute = () => {
       
      
       <Stack.Screen
-<<<<<<< Updated upstream
         name="Notification"
         component={Notification}
         options={{headerShown: false, animation: 'slide_from_bottom'}}
@@ -37,10 +36,6 @@ const AuthRoute = () => {
       <Stack.Screen
         name="Profile"
         component={Profile}
-=======
-        name="BottomNavigation"
-        component={BottomTabNavigation}
->>>>>>> Stashed changes
         options={{headerShown: false, animation: 'slide_from_bottom'}}
       />
       <Stack.Screen

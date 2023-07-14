@@ -23,7 +23,7 @@ const ListOfProperty:React.FC<any> = ({route}) => {
             <Text style={styles.cityname}> {route.params.cityName}</Text>
           </Text>
         </View>
-        <CategoryEstate cityName={cityName} />
+        <CategoryEstate />
       </View>
     </SafeAreaView>
   );

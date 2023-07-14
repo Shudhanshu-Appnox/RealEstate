@@ -19,12 +19,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {SearchPropertyService} from '../../services/properties';
-<<<<<<< Updated upstream
 import { useNavigation } from '@react-navigation/native';
-=======
-import {useNavigation} from '@react-navigation/native';
-import ImageSlider from '../../component/common/ImageSlider/ImageSlider';
->>>>>>> Stashed changes
 
 const CategoryEstate: React.FC<any> = ({cityName}) => {
   const heartImage = require('../../../assets/images/Heart.png');
@@ -33,10 +28,6 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
   const mainImage = require('../../../assets/images/image26.png');
 
   const [cityData, setCityData] = useState([]);
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
   const navigation = useNavigation();
   const GetPropertyData = async () => {
     try {
@@ -72,7 +63,6 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
   const getItemCount = () => 1;
 
   const Item = ({data}: any) => (
-<<<<<<< Updated upstream
    
       <TouchableOpacity onPress={() => navigation.navigate('DetailedPage' as never, {data})} style={styles.container}>
         <View style={styles.featuredCard}>
@@ -101,30 +91,6 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
           </View>
         </View>
       </TouchableOpacity>
-=======
-    <TouchableOpacity style={styles.container}>
-      <View style={styles.featuredCard}>
-        <View style={styles.details}>
-          <View style={styles.detailsHeader}>
-            <Text style={styles.detailesHeadertext}>{data.title}</Text>
-            <View style={styles.ratingContainer}>
-              <Image style={styles.star} source={locationImage} />
-              <Text style={{fontSize: 10}}>{data.location}</Text>
-            </View>
-          </View>
-        </View>
-        <ImageBackground style={styles.imageContainer} source={mainImage}>
-          <TouchableOpacity style={styles.heartContainer}>
-            <Image style={styles.heart} source={heartImage} />
-          </TouchableOpacity>
-        </ImageBackground>
-
-        <Text style={{}}>
-          {data.price}
-        </Text>
-      </View>
-    </TouchableOpacity>
->>>>>>> Stashed changes
   );
 
   return (
@@ -150,13 +116,8 @@ const styles = StyleSheet.create({
   },
 
   featuredCard: {
-<<<<<<< Updated upstream
-    flexDirection: 'row',
-    borderRadius: 40,
-=======
     width: responsiveWidth(94),
     borderRadius: responsiveWidth(10),
->>>>>>> Stashed changes
     backgroundColor: '#F5F4F8',
     gap: responsiveScreenWidth(3),
   },
