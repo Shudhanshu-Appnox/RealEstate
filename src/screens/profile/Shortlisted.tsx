@@ -13,13 +13,13 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
-import CustomModal from '../search/Modal';
-import BuyModal from '../../component/homepages/Modal/BuyModal';
-import RentModal from '../../component/homepages/Modal/RentModal';
-import BuyPlotLand from '../../component/homepages/Modal/BuyPlotLand';
-import CoWorkSpace from '../../component/homepages/Modal/CoWorkSpace';
-import LeaseCommercial from '../../component/homepages/Modal/LeaseCommercial';
-import BuyCommercial from '../../component/homepages/Modal/BuyCommercial';
+// import CustomModal from '../search/Modal';
+// import BuyModal from '../../component/homepages/Modal/BuyModal';
+// import RentModal from '../../component/homepages/Modal/RentModal';
+// import BuyPlotLand from '../../component/homepages/Modal/BuyPlotLand';
+// import CoWorkSpace from '../../component/homepages/Modal/CoWorkSpace';
+// import LeaseCommercial from '../../component/homepages/Modal/LeaseCommercial';
+// import BuyCommercial from '../../component/homepages/Modal/BuyCommercial';
 
 const DATA = [
   {
@@ -54,13 +54,11 @@ const Item = ({
     setShowModal(true);
   };
   return (
-  
-      <TouchableOpacity onPress={handleOptionPress}>
-        <View style={styles.item}>
-          <Text style={styles.title}>{title}</Text>
-        </View>
-      </TouchableOpacity>
-
+    <TouchableOpacity onPress={handleOptionPress}>
+      <View style={styles.item}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -70,23 +68,25 @@ const Category = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.viewContainer}>
-      <Text style={styles.shortlist}>Shortlists</Text>
-      <Text style={styles.shortlistSecond}>Find all your shortlists at one</Text>
-      <FlatList
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        data={DATA}
-        renderItem={({item}) => (
-          <Item
-            setShowModal={setShowModal}
-            selectedOption={selectedOption}
-            setSelectedOption={setSelectedOption}
-            title={item.title}
-          />
-        )}
-        keyExtractor={item => item.id}
-      />
-      {/* <CustomModal title={selectedOption} modalOpen={showModal}>
+        <Text style={styles.shortlist}>Shortlists</Text>
+        <Text style={styles.shortlistSecond}>
+          Find all your shortlists at one
+        </Text>
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={DATA}
+          renderItem={({item}) => (
+            <Item
+              setShowModal={setShowModal}
+              selectedOption={selectedOption}
+              setSelectedOption={setSelectedOption}
+              title={item.title}
+            />
+          )}
+          keyExtractor={item => item.id}
+        />
+        {/* <CustomModal title={selectedOption} modalOpen={showModal}>
         {selectedOption === 'Buy' ? (
           <BuyModal setModalOpen={setShowModal} />
         ) : null}
@@ -116,10 +116,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     marginTop: StatusBar.currentHeight || 0,
-   
   },
   viewContainer: {
-    paddingHorizontal: responsiveScreenWidth(4)
+    paddingHorizontal: responsiveScreenWidth(4),
   },
   item: {
     paddingHorizontal: responsiveScreenWidth(3),

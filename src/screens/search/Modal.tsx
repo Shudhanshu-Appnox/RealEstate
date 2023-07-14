@@ -10,33 +10,36 @@ import {
   Image,
   Modal,
 } from 'react-native';
-import { useState } from 'react';
+import {useState} from 'react';
 import React from 'react';
-import { responsiveScreenHeight,responsiveScreenWidth  } from 'react-native-responsive-dimensions';
+import {
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from 'react-native-responsive-dimensions';
 
-const searchImg = require('../../../assets/images/Search.png');
-
-
-
-const CustomModal:React.FC<any> = ({ title, modalOpen, setTitle, children }) => {
-    // const [modalOpen, setModalOpen] = useState(false);
+const CustomModal: React.FC<any> = ({title, modalOpen, setTitle, children}) => {
+  const searchImg = require('../../../assets/images/Search.png');
+  // const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <View style={{flex: 1, backgroundColor: 'red'}}>
-     <Modal style={styles.modal} visible={modalOpen} animationType="slide" transparent={true}>
+      <Modal
+        style={styles.modal}
+        visible={modalOpen}
+        animationType="slide"
+        transparent={true}>
         {children}
       </Modal>
-   
     </View>
   );
-}
+};
 
-export default CustomModal
+export default CustomModal;
 
 const styles = StyleSheet.create({
-    modalOpen: {},
+  modalOpen: {},
   modal: {
-    flex:1,
+    flex: 1,
     backgroundColor: 'red',
     borderWidth: 1,
     borderTopLeftRadius: 20,

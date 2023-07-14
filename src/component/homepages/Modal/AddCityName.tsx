@@ -13,50 +13,46 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import ExploreButton from '../../common/buttons/ExploreButton';
-import HeaderWithBackBtn from '../../common/buttons/HeaderWithBackBtn';
 
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {UpdateCityName} from '../../../redux/reducers/filterReducer';
 
-const SearchModal: React.FC<any> = ({setModalOpen}) => {
+const AddCityName: React.FC<any> = ({route}) => {
+  const dispatch = useDispatch();
+  const {cityName} = useSelector((store: any) => store.filter);
   const searchImg = require('../../../../assets/images/Search.png');
   const vector1mg = require('../../../../assets/images/Vector1.png');
-  const [cityName, setCityName] = useState('');
-  const [title, setTitle] = useState('Co-working Space');
-  const Navigation = useNavigation();
-  const handleSubmit = () => {
-    console.log('Hello');
+  const navigation = useNavigation();
+
+  const textChangeHandler = (text: string) => {
+    dispatch(UpdateCityName(text));
   };
+
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.modalContainer}>
         <TouchableOpacity
           style={styles.containerImg}
-          onPress={() => setModalOpen(false)}>
+          onPress={() => navigation.goBack()}>
           <Image style={styles.image} source={vector1mg} />
         </TouchableOpacity>
 
-        <View>
-          <TouchableOpacity style={styles.inputContainer}>
-            <TextInput
-              placeholder="Search City / Locality / Projects / Landmarks...."
-              onChangeText={text => setCityName(text)}
-            />
-            <Image source={searchImg} />
-          </TouchableOpacity>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Search City / Locality / Projects / Landmarks...."
+            onChangeText={text => textChangeHandler(text)}
+            value={cityName}
+          />
+          <Image source={searchImg} />
         </View>
-        <ExploreButton
-          title="Continue"
-          onPress={() => {
-            Navigation.navigate('ListOfProperty' as never, {cityName, title}),
-              setModalOpen(false);
-          }}
-        />
+        <ExploreButton title="Continue" onPress={() => navigation.goBack()} />
       </View>
     </SafeAreaView>
   );
 };
 
-export default SearchModal;
+export default AddCityName;
 
 const styles = StyleSheet.create({
   containerImg: {

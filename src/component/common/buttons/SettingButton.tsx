@@ -5,6 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 
 export default function SettingButton() {
   const navigation = useNavigation();
+  const settingImg = require('../../../../assets/images/Setting.png')
 
   return (
     <SafeAreaView>
@@ -14,7 +15,7 @@ export default function SettingButton() {
           style={styles.containerImg}>
           <Image
             style={styles.image}
-            source={require('../../../../assets/images/Setting.png')}
+            source={settingImg}
           />
         </TouchableOpacity>
     

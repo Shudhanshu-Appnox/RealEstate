@@ -29,8 +29,10 @@ export default function Register() {
   const [emailValidError, setEmailValidError] = useState('');
   const [phoneValidError, setPhoneValidError] = useState('');
   const [isFocus, setIsFocus] = useState(false);
-  const maskgroup = '../../../assets/images/Maskgroup.png';
+  const vectorImg = require('../../../assets/images/Vector1.png');
   const profile = '../../../assets/images/Profile.png';
+  const groupImg = require('../../../assets/images/Group.png');
+  const callImg = require('../../../assets/images/Call.png')
 
   const validation = () => {
     if (!name.length) {
@@ -84,7 +86,7 @@ export default function Register() {
           style={styles.containerImg}>
           <Image
             style={styles.image}
-            source={require(maskgroup)}
+            source={vectorImg}
           />
         </TouchableOpacity>
 
@@ -129,7 +131,7 @@ export default function Register() {
               }}
               onFocus={() => setIsFocus(true)}
             />
-            <Image source={require('../../../assets/images/Group.png')} />
+            <Image source={groupImg} />
           </View>
           {emailValidError ? (
             <Text style={styles.errorText}>{emailValidError}</Text>
@@ -151,7 +153,7 @@ export default function Register() {
             />
             <Image
               style={styles.imagePhone}
-              source={require('../../../assets/images/Call.png')}
+              source={callImg}
             />
           </View>
           {phoneValidError ? (

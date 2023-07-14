@@ -51,7 +51,7 @@ const useAuthServiceHandler = () => {
   const handleRegisterService = async (data: any) => {
     try {
       const res = await RegisterService(data);
-      // dispatch(SetIsLoadingState(false));
+      dispatch(SetIsLoadingState(true));
       const {result} = res.data;
       console.log(result);
       Navigation.navigate('HomePage' as never);
@@ -68,3 +68,7 @@ const useAuthServiceHandler = () => {
 };
 
 export default useAuthServiceHandler;
+function SetIsLoadingState(arg0: boolean): any {
+  throw new Error('Function not implemented.');
+}
+

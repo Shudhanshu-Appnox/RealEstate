@@ -21,14 +21,12 @@ import FeaturedCategories from '../../homepage/FeaturedCategories';
 import CategoryEstate from '../../homepage/CategoryEstate';
 import BackWithSetting from '../../../component/common/buttons/BackWithSetting';
 
-
-const backGroundImg = require('../../../../assets/images/image31.png');
-const SearchImg = require('../../../../assets/images/Search.png');
-const mic = require('../../../../assets/images/Mic.png');
-const showImg = require('../../../../assets/images/Show.png');
-const horizontalImg = require('../../../../assets/images/HorizontalActive.png')
-
 export default function Villa() {
+  const backGroundImg = require('../../../../assets/images/image31.png');
+  const SearchImg = require('../../../../assets/images/Search.png');
+  const mic = require('../../../../assets/images/Mic.png');
+  const showImg = require('../../../../assets/images/Show.png');
+  const horizontalImg = require('../../../../assets/images/HorizontalActive.png');
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <ScrollView>
@@ -58,10 +56,7 @@ export default function Villa() {
             />
             <View style={styles.verticleLine}></View>
             <TouchableOpacity>
-              <Image
-                style={styles.mic}
-                source={mic}
-              />
+              <Image style={styles.mic} source={mic} />
             </TouchableOpacity>
           </View>
           <View style={styles.dataListContainer}>
@@ -71,14 +66,10 @@ export default function Villa() {
               </Text>
               <View style={styles.iconDataImg}>
                 <TouchableOpacity style={styles.vertical}>
-                  <Image
-                    source={showImg}
-                  />
+                  <Image source={showImg} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.horizonatal}>
-                  <Image
-                    source={horizontalImg}
-                  />
+                  <Image source={horizontalImg} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -136,7 +127,7 @@ const styles = StyleSheet.create({
   noOfList: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical: responsiveScreenHeight(1)
+    marginVertical: responsiveScreenHeight(1),
   },
   noOfListText: {
     alignItems: 'center',
@@ -158,7 +149,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 40,
   },
-  vertical: {
-
-  },
+  vertical: {},
 });

@@ -27,13 +27,12 @@ import ExploreNearbyEstate from '../../screens/discover/Category/ExploreNearbyEs
 import TopLocation from '../discover/Category/TopLocation';
 import TopEstateAgent from '../discover/Category/TopEstateAgent';
 
-const downImg = require('../../../assets/images/Down.png');
-const locatinImg = require('../../../assets/images/Location.png');
-const notificationImg = require('../../../assets/images/Notification.png');
-const ellipseImg = require('../../../assets/images/Ellipse.png');
-const searchImg = require('../../../assets/images/Search.png');
-
 const HomePage = () => {
+  const downImg = require('../../../assets/images/Down.png');
+  const locatinImg = require('../../../assets/images/Location.png');
+  const notificationImg = require('../../../assets/images/Notification.png');
+  const ellipseImg = require('../../../assets/images/Ellipse.png');
+  const searchImg = require('../../../assets/images/Search.png');
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -66,8 +65,13 @@ const HomePage = () => {
             Find your dream home
           </Text>
 
-          <TouchableOpacity onPress={() => navigation.navigate('SearchFilterPage' as never)} style={styles.serchContainer}>
-            <Text><Text style={{fontWeight: 'bold'}}>Search </Text>City, Locality, Project, Landmar</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('SearchFilterPage' as never)}
+            style={styles.serchContainer}>
+            <Text>
+              <Text style={{fontWeight: 'bold'}}>Search </Text>City, Locality,
+              Project, Landmar
+            </Text>
             <Image source={searchImg} />
           </TouchableOpacity>
 
