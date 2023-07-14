@@ -19,14 +19,24 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {SearchPropertyService} from '../../services/properties';
+<<<<<<< Updated upstream
 import { useNavigation } from '@react-navigation/native';
+=======
+import {useNavigation} from '@react-navigation/native';
+import ImageSlider from '../../component/common/ImageSlider/ImageSlider';
+>>>>>>> Stashed changes
 
 const CategoryEstate: React.FC<any> = ({cityName}) => {
   const heartImage = require('../../../assets/images/Heart.png');
   const starImage = require('../../../assets/images/Star.png');
   const locationImage = require('../../../assets/images/Location.png');
   const mainImage = require('../../../assets/images/image26.png');
+
   const [cityData, setCityData] = useState([]);
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
   const navigation = useNavigation();
   const GetPropertyData = async () => {
     try {
@@ -62,6 +72,7 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
   const getItemCount = () => 1;
 
   const Item = ({data}: any) => (
+<<<<<<< Updated upstream
    
       <TouchableOpacity onPress={() => navigation.navigate('DetailedPage' as never, {data})} style={styles.container}>
         <View style={styles.featuredCard}>
@@ -90,6 +101,30 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
           </View>
         </View>
       </TouchableOpacity>
+=======
+    <TouchableOpacity style={styles.container}>
+      <View style={styles.featuredCard}>
+        <View style={styles.details}>
+          <View style={styles.detailsHeader}>
+            <Text style={styles.detailesHeadertext}>{data.title}</Text>
+            <View style={styles.ratingContainer}>
+              <Image style={styles.star} source={locationImage} />
+              <Text style={{fontSize: 10}}>{data.location}</Text>
+            </View>
+          </View>
+        </View>
+        <ImageBackground style={styles.imageContainer} source={mainImage}>
+          <TouchableOpacity style={styles.heartContainer}>
+            <Image style={styles.heart} source={heartImage} />
+          </TouchableOpacity>
+        </ImageBackground>
+
+        <Text style={{}}>
+          {data.price}
+        </Text>
+      </View>
+    </TouchableOpacity>
+>>>>>>> Stashed changes
   );
 
   return (
@@ -110,52 +145,54 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: responsiveScreenWidth(1),
+
+    backgroundColor: 'white',
   },
 
   featuredCard: {
+<<<<<<< Updated upstream
     flexDirection: 'row',
     borderRadius: 40,
+=======
+    width: responsiveWidth(94),
+    borderRadius: responsiveWidth(10),
+>>>>>>> Stashed changes
     backgroundColor: '#F5F4F8',
-    padding: responsiveScreenWidth(1.5),
     gap: responsiveScreenWidth(3),
   },
   imageContainer: {
     alignItems: 'flex-end',
-    width: responsiveWidth(40),
-    height: responsiveHeight(20),
-    gap: responsiveHeight(9.5),
-    paddingRight: responsiveScreenWidth(1.5),
-    paddingTop: responsiveScreenHeight(1),
+    justifyContent: 'space-between',
+    width: responsiveScreenWidth(83),
+    height: responsiveScreenHeight(20),
+    marginVertical: responsiveScreenHeight(4),
+    marginHorizontal: responsiveScreenWidth(6),
+    paddingHorizontal: responsiveScreenWidth(2),
+    paddingVertical: responsiveScreenHeight(1),
   },
   heartContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: responsiveWidth(8),
+    width: responsiveWidth(8.7),
     height: responsiveHeight(4),
-    borderRadius: 50,
+    borderRadius: responsiveScreenWidth(50),
     backgroundColor: '#8BC83F',
   },
   heart: {
     width: responsiveWidth(3),
     height: responsiveHeight(1.5),
   },
-  button: {
-    width: responsiveWidth(22),
-    padding: responsiveScreenWidth(2),
-    backgroundColor: '#234F68',
-    borderRadius: 8,
+  // padding: responsiveHeight(2),
 
-    // padding: responsiveHeight(2),
-  },
   details: {
-    padding: responsiveScreenWidth(2),
+    paddingHorizontal: responsiveScreenWidth(5),
+    paddingVertical: responsiveScreenHeight(2.4)
   },
 
   buttonText: {
     color: '#fff',
     textAlign: 'center',
-    fontSize: 10,
+    fontSize: responsiveFontSize(1.6),
   },
   ratingContainer: {
     flexDirection: 'row',

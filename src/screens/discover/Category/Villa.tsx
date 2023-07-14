@@ -20,6 +20,7 @@ import {
 import FeaturedCategories from '../../homepage/FeaturedCategories';
 import CategoryEstate from '../../homepage/CategoryEstate';
 import BackWithSetting from '../../../component/common/buttons/BackWithSetting';
+import AddCityName from '../../../component/homepages/Modal/AddCityName';
 
 export default function Villa() {
   const backGroundImg = require('../../../../assets/images/image31.png');
@@ -73,7 +74,7 @@ export default function Villa() {
                 </TouchableOpacity>
               </View>
             </View>
-            <CategoryEstate />
+            <CategoryEstate cityName={AddCityName} />
           </View>
         </View>
       </ScrollView>
