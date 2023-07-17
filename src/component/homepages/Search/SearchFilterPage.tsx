@@ -7,7 +7,7 @@ import {
   FlatList,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import HeaderWithBackBtn from '../../common/buttons/HeaderWithBackBtn';
 import {
   responsiveFontSize,
@@ -23,10 +23,12 @@ import ExploreButton from '../../common/buttons/ExploreButton';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {UpdateCityName} from '../../../redux/reducers/filterReducer';
+import { URL } from '@env';
+import axios from 'axios';
 
 const SearchFilterPage = ({route}: any) => {
-  const [residential, setResidential] = useState(true);
-  const [commercial, setCommercial] = useState(false);
+  // const [selectedBedroom, setSelectedBedroom] = useState(1);
+  const [areaType, setAreaType] = useState<'residential' | 'commercial'>('residential');
   const [buy, setBuy] = useState(true);
   const [rent, setRent] = useState(false);
   const [bgColor, setbgColor] = useState(false);
@@ -34,11 +36,13 @@ const SearchFilterPage = ({route}: any) => {
   const [bgColor2, setbgColor2] = useState(false);
   const [sliderValue, setSliderValue] = useState(10);
   const [onPress, setOnPress] = useState(true);
-  const [selectedId, setSelectedId] = useState('');
+  const [selectedId, setSelectedId] = useState(1);
   const [bedrooms, setBedrooms] = useState(false);
   const {cityName} = useSelector((store: any) => store.filter);
   const [yes, setYes] = useState(false);
   const [no, setNo] = useState(false);
+  const Navigation = useNavigation();
+  // const [searchString, setSearchString] = useState(`${cityName}&type=${areaType === 'residential' ? "Residential-property" : "Commercial-property"}&price=${sliderValue}`);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -58,29 +62,49 @@ const SearchFilterPage = ({route}: any) => {
     return setbgColor2(!bgColor2);
   };
 
+  const handleSearch = async () => {
+    try {
+      const searchString = `properties/?search=${cityName}&type=${areaType === 'residential' ? "Residential-property" : "Commercial-property"}&price=${sliderValue}&bedrooms=${selectedId}`;
+      const url = `${URL}${searchString}`;
+      console.log('url', url);
+      
+      const res = await axios.get(url);
+      console.log('res', res);
+      const {result} = res.data;
+      console.log('result', result);
+      Navigation.navigate('RenderSearchResult' as never, {cityData: result.rows, cityName});
+    } catch (error) {
+      console.log('Error');
+    }
+  }
+
   const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
       title: '1RK / 1BHK',
+      value: 1
     },
     {
       id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
       title: '2BHK',
+      value: 2
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
       title: '3BHK',
+      value: 3
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d71',
       title: '4BHK',
+      value: 4
     },
   ];
 
   const Item = ({item}: any) => {
     return (
-      <TouchableOpacity onPress={() => {setSelectedId(item.id), setBedrooms(true)}}>
-        <View style={selectedId === item.id && bedrooms ? styles.afterClickOnItem : styles.item}>
+      <TouchableOpacity onPress={() => setSelectedId(item.value)}>
+        <View style={selectedId === item.value ? styles.afterClickOnItem : styles.item}>
           {selectedId === item.id && bedrooms ? (
             <Ionicons style={styles.addFont} name={'checkmark'} />
           ) : (
@@ -102,16 +126,16 @@ const SearchFilterPage = ({route}: any) => {
           <View style={styles.propertyTYpe}>
             <TouchableOpacity
               onPress={() => {
-                setResidential(true), setCommercial(false);
+                setAreaType('residential');
               }}
-              style={residential ? styles.typeColor : styles.residential}>
+              style={areaType === 'residential' ? styles.typeColor : styles.residential}>
               <Text>Residential</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                setCommercial(true), setResidential(false);
+                setAreaType('commercial')
               }}
-              style={commercial ? styles.typeColor : styles.residential}>
+              style={areaType === 'commercial' ? styles.typeColor : styles.residential}>
               <Text>Commercial</Text>
             </TouchableOpacity>
           </View>
@@ -162,11 +186,11 @@ const SearchFilterPage = ({route}: any) => {
             <Text>${sliderValue}+ </Text>
           </View>
           <Slider
-            maximumValue={1000}
-            minimumValue={5}
+            maximumValue={10000000}
+            minimumValue={5000}
             minimumTrackTintColor="#8BC83F"
             maximumTrackTintColor="gray"
-            step={50}
+            step={500000}
             value={sliderValue}
             onValueChange={sliderValue => setSliderValue(sliderValue)}
           />
@@ -254,7 +278,7 @@ const SearchFilterPage = ({route}: any) => {
           </View>
         </View>
         <View style={styles.button}>
-          <ExploreButton title={'Search'} />
+          <ExploreButton title='Search' onPress={handleSearch}/>
         </View>
       </ScrollView>
     </SafeAreaView>

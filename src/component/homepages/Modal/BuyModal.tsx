@@ -15,8 +15,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import ExploreButton from '../../common/buttons/ExploreButton';
 import {useNavigation} from '@react-navigation/native';
-import SearchModal from './SearchModal';
-import {white} from '../../../../assets/Styles/GlobalTheme';
+
 
 const BuyModal: React.FC<any> = ({setModalOpen}) => {
   const searchImg = require('../../../../assets/images/Search.png');
@@ -116,7 +115,7 @@ const BuyModal: React.FC<any> = ({setModalOpen}) => {
             ) : (
               <TextInput
                 placeholder="Enter City Name"
-                onChangeText={text => setCityName(text)}
+                onChangeText={(text) => setCityName(text)}
               />
             )}
 

@@ -28,7 +28,6 @@ import ExploreNearbyEstate from '../../screens/discover/Category/ExploreNearbyEs
 import TopLocation from '../discover/Category/TopLocation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-
 const HomePage = () => {
   const notificationImg = require('../../../assets/images/Notification.png');
   const ellipseImg = require('../../../assets/images/Ellipse.png');
@@ -44,11 +43,10 @@ const HomePage = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Modal visible={modalOpen} animationType="slide">
-        <View style={{flex: 1 ,marginTop: responsiveScreenWidth(10)}}>
-        <TouchableOpacity onPress={() => setModalOpen(false)}>
-          <Ionicons name="close" size={responsiveWidth(10)} />
-        </TouchableOpacity>
-          <Text>Hello</Text>
+        <View style={styles.hamBurgerMenu}>
+          <TouchableOpacity onPress={() => setModalOpen(false)}>
+            <Ionicons name="close" size={responsiveWidth(10)} />
+          </TouchableOpacity>
         </View>
       </Modal>
       <View style={styles.headerItems}>
@@ -135,6 +133,12 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  hamBurgerMenu: {
+    flex: 1,
+    marginTop: responsiveScreenWidth(10),
+    // borderWidth: responsiveWidth(0.1),
+    
   },
 
   container: {

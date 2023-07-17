@@ -10,6 +10,7 @@ import {
   ImageBackground,
   Image,
   Alert,
+  ScrollView,
 } from 'react-native';
 import {
   responsiveFontSize,
@@ -19,41 +20,26 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {SearchPropertyService} from '../../services/properties';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
-const CategoryEstate: React.FC<any> = ({cityName}) => {
+interface props {
+  cityData: Array<any>
+};
+
+const CategoryEstate: React.FC<props> = ({cityData}) => {
   const heartImage = require('../../../assets/images/Heart.png');
   const starImage = require('../../../assets/images/Star.png');
   const locationImage = require('../../../assets/images/Location.png');
   const mainImage = require('../../../assets/images/image26.png');
 
-  const [cityData, setCityData] = useState([]);
   const navigation = useNavigation();
-  const GetPropertyData = async () => {
-    try {
-      const res = await SearchPropertyService(cityName);
-      
-      const {result} = res.data;
-      
-      if (result.rows) {
-        setCityData(result.rows);
-      } else {
-        setCityData([]);
-      }
-    } catch (error) {
-      Alert.alert('', 'Error');
-    }
-  };
 
-  useEffect(() => {
-    GetPropertyData();
-  }, []);
 
   type ItemData = {
     id: string;
     title: string;
   };
-  
+
   const getItem = (_data: unknown, index: number): ItemData => ({
     id: Math.random().toString(12).substring(0),
     title: `Item ${index + 1}`,
@@ -61,49 +47,46 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
 
   type ItemProps = {image: string};
   const getItemCount = () => 1;
-
+  
   const Item = ({data}: any) => (
-   
-      <TouchableOpacity onPress={() => navigation.navigate('DetailedPage' as never, {data})} style={styles.container}>
-        <View style={styles.featuredCard}>
-          <ImageBackground style={styles.imageContainer} source={mainImage}>
-            <TouchableOpacity style={styles.heartContainer}>
-              <Image style={styles.heart} source={heartImage} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>
-                {data.price}
-                <Text style={{fontSize: 8}}>/Month</Text>
-              </Text>
-            </TouchableOpacity>
-          </ImageBackground>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('DetailedPage' as never, {data})}
+      style={styles.itemContainer}>
+      <View style={styles.featuredCard}>
+        <ImageBackground style={styles.imageContainer} source={mainImage}>
+          <TouchableOpacity style={styles.heartContainer}>
+            <Image style={styles.heart} source={heartImage} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>
+              {data.price}
+              <Text style={{fontSize: 8}}>/Month</Text>
+            </Text>
+          </TouchableOpacity>
+        </ImageBackground>
 
-          <View style={styles.details}>
-            <View style={styles.detailsHeader}>
-              <Text style={styles.detailesHeadertext}>{data.title}</Text>
-              <View style={styles.ratingContainer}>
-                <Image style={styles.star} source={starImage} />
-                <Text style={{fontSize: 10}}>{data.rating}</Text>
-                <Image style={styles.star} source={locationImage} />
-                <Text style={{fontSize: 10}}>{data.location}</Text>
-              </View>
+        <View style={styles.details}>
+          <View style={styles.detailsHeader}>
+            <Text style={styles.detailesHeadertext}>{data.title}</Text>
+            <View style={styles.ratingContainer}>
+              <Image style={styles.star} source={starImage} />
+              <Text style={{fontSize: 10}}>{data.rating}</Text>
+              <Image style={styles.star} source={locationImage} />
+              <Text style={{fontSize: 10}}>{data.location}</Text>
             </View>
           </View>
         </View>
-      </TouchableOpacity>
+      </View>
+    </TouchableOpacity>
   );
 
   return (
     <SafeAreaView style={styles.container}>
-     
-      <VirtualizedList
-      showsVerticalScrollIndicator={false}
-        data={cityData}
-        renderItem={({item}) => <Item data={item} />}
-        keyExtractor={item => item.id}
-        getItemCount={getItemCount}
-        getItem={getItem}
-      />
+      <ScrollView contentContainerStyle={{alignItems: 'center'}} showsVerticalScrollIndicator={false} >
+        {
+          cityData?.map((item: any) => <Item data={item} />)
+        }
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -111,10 +94,11 @@ const CategoryEstate: React.FC<any> = ({cityName}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     backgroundColor: 'white',
   },
-
+  itemContainer: {
+    marginVertical: responsiveScreenHeight(1)
+  },
   featuredCard: {
     width: responsiveWidth(94),
     borderRadius: responsiveWidth(10),
@@ -147,7 +131,7 @@ const styles = StyleSheet.create({
 
   details: {
     paddingHorizontal: responsiveScreenWidth(5),
-    paddingVertical: responsiveScreenHeight(2.4)
+    paddingVertical: responsiveScreenHeight(2.4),
   },
 
   buttonText: {
@@ -178,6 +162,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  button: {},
 });
 
 export default CategoryEstate;

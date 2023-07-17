@@ -15,19 +15,19 @@ import AddCityName from '../component/homepages/Modal/AddCityName';
 import DetailedPage from '../component/homepages/Search/DetailedPage';
 import Notification from '../screens/profile/Notification';
 import Profile from '../screens/profile/Profile';
+import RenderSearchResult from '../component/homepages/Search/RenderSearchResult';
 
 const Stack = createNativeStackNavigator();
 
 const AuthRoute = () => {
   return (
     <Stack.Navigator>
-       <Stack.Screen
+      <Stack.Screen
         name="BottomTabNavigation"
         component={BottomTabNavigation}
         options={{headerShown: false, animation: 'slide_from_bottom'}}
       />
-      
-     
+
       <Stack.Screen
         name="Notification"
         component={Notification}
@@ -51,6 +51,11 @@ const AuthRoute = () => {
       <Stack.Screen
         name="Villa"
         component={Villa}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="RenderSearchResult"
+        component={RenderSearchResult}
         options={{headerShown: false}}
       />
       <Stack.Screen
