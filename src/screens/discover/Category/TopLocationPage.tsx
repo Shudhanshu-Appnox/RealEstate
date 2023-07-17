@@ -100,7 +100,7 @@ const TopLocationPage = () => {
   );
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <ScrollView>
         <View style={styles.container}>
           <BackWithSetting />

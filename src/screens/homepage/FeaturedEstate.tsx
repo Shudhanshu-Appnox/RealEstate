@@ -18,34 +18,23 @@ import {
 import FeaturedCategories from './FeaturedCategories';
 import CategoryEstate from './CategoryEstate';
 
-const image28 = require('../../../assets/images/image28.png')
-const image29 = require('../../../assets/images/image29.png')
-const image30 = require('../../../assets/images/image30.png')
-const serachImg = require('../../../assets/images/Search.png')
-const micImg = require('../../../assets/images/Mic.png')
-const showImg =  require('../../../assets/images/Show.png')
-const horizonatalImg =  require('../../../assets/images/HorizontalActive.png')
-
-
 export default function FeaturedEstate() {
+  const image28 = require('../../../assets/images/image28.png');
+  const image29 = require('../../../assets/images/image29.png');
+  const image30 = require('../../../assets/images/image30.png');
+  const serachImg = require('../../../assets/images/Search.png');
+  const micImg = require('../../../assets/images/Mic.png');
+  const showImg = require('../../../assets/images/Show.png');
+  const horizonatalImg = require('../../../assets/images/HorizontalActive.png');
   return (
     <SafeAreaView style={styles.conatiner}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <BackWithSetting />
         <View style={styles.mainImgContainer}>
-          <Image
-            style={styles.mainImg}
-            source={image28}
-          />
+          <Image style={styles.mainImg} source={image28} />
           <View style={styles.secondImgContainer}>
-            <Image
-              style={styles.secondImg}
-              source={image29}
-            />
-            <Image
-              style={styles.secondImg}
-              source={image30}
-            />
+            <Image style={styles.secondImg} source={image29} />
+            <Image style={styles.secondImg} source={image30} />
           </View>
         </View>
         <View style={styles.searchContainer}>
@@ -55,7 +44,6 @@ export default function FeaturedEstate() {
           </Text>
 
           <View style={styles.searchInput}>
-            
             <TextInput
               style={styles.input}
               placeholder="Full Search House, Apartment, etc"
@@ -81,9 +69,7 @@ export default function FeaturedEstate() {
                   <Image source={showImg} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.horizonatal}>
-                  <Image
-                    source={horizonatalImg}
-                  />
+                  <Image source={horizonatalImg} />
                 </TouchableOpacity>
               </View>
             </View>
