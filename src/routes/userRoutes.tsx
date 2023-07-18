@@ -26,6 +26,7 @@ export default function userRoutes() {
         component={RegisterWithOTP}
         options={{headerShown: false}}
       />
+      
       <Stack.Screen
         name="HomePage"
         component={HomePage}

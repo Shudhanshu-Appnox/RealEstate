@@ -17,35 +17,25 @@ import {
 } from 'react-native-responsive-dimensions';
 import FeaturedCategories from './FeaturedCategories';
 import CategoryEstate from './CategoryEstate';
-
-const image28 = require('../../../assets/images/image28.png')
-const image29 = require('../../../assets/images/image29.png')
-const image30 = require('../../../assets/images/image30.png')
-const serachImg = require('../../../assets/images/Search.png')
-const micImg = require('../../../assets/images/Mic.png')
-const showImg =  require('../../../assets/images/Show.png')
-const horizonatalImg =  require('../../../assets/images/HorizontalActive.png')
-
+import { useNavigation } from '@react-navigation/native';
 
 export default function FeaturedEstate() {
+  const image28 = require('../../../assets/images/image28.png');
+  const image29 = require('../../../assets/images/image29.png');
+  const image30 = require('../../../assets/images/image30.png');
+  const searchImg = require('../../../assets/images/Search.png');
+  const showImg = require('../../../assets/images/Show.png');
+  const horizonatalImg = require('../../../assets/images/HorizontalActive.png');
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.conatiner}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <BackWithSetting />
         <View style={styles.mainImgContainer}>
-          <Image
-            style={styles.mainImg}
-            source={image28}
-          />
+          <Image style={styles.mainImg} source={image28} />
           <View style={styles.secondImgContainer}>
-            <Image
-              style={styles.secondImg}
-              source={image29}
-            />
-            <Image
-              style={styles.secondImg}
-              source={image30}
-            />
+            <Image style={styles.secondImg} source={image29} />
+            <Image style={styles.secondImg} source={image30} />
           </View>
         </View>
         <View style={styles.searchContainer}>
@@ -54,23 +44,15 @@ export default function FeaturedEstate() {
             Our recommended real estates exclusive for you.
           </Text>
 
-          <View style={styles.searchInput}>
-            
-            <TextInput
-              style={styles.input}
-              placeholder="Full Search House, Apartment, etc"
-              // value={value}
-              autoCorrect={true}
-              autoCapitalize="none"
-              // onChangeText={value => {
-              //   setValue(value);
-              // }}
-              // onFocus={() => setIsFocus(true)}
-            />
-            <TouchableOpacity>
-              <Image source={serachImg} />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('SearchFilterPage' as never)}
+            style={styles.serchContainer}>
+            <Text>
+              <Text style={{fontWeight: 'bold'}}>Search </Text>City, Locality,
+              Project, Landmark
+            </Text>
+            <Image source={searchImg} />
+          </TouchableOpacity>
           <View style={styles.dataListContainer}>
             <View style={styles.noOfList}>
               <Text style={styles.noOfListText}>
@@ -81,9 +63,7 @@ export default function FeaturedEstate() {
                   <Image source={showImg} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.horizonatal}>
-                  <Image
-                    source={horizonatalImg}
-                  />
+                  <Image source={horizonatalImg} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -122,7 +102,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     marginTop: responsiveScreenHeight(2.5),
     paddingHorizontal: responsiveScreenWidth(5),
-    gap: responsiveScreenHeight(1),
+    gap: responsiveScreenHeight(2.6),
   },
   realestateText: {
     color: '#252B5C',
@@ -131,33 +111,20 @@ const styles = StyleSheet.create({
   text1: {
     fontSize: responsiveFontSize(1.5),
   },
-  searchInput: {
+  serchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    height: responsiveScreenHeight(8),
+    height: responsiveScreenHeight(7),
     width: responsiveScreenWidth(90),
     borderWidth: 0,
     backgroundColor: '#F5F4F8',
     borderColor: '#F5F4F8',
     borderRadius: 10,
-    paddingHorizontal: responsiveScreenWidth(3),
-    marginTop: responsiveScreenHeight(2),
+    paddingHorizontal: responsiveScreenWidth(4),
+    marginHorizontal: responsiveScreenWidth(1),
     gap: responsiveScreenWidth(2),
     fontSize: 12,
-  },
-  input: {
-    flex: 2,
-  },
-  verticleLine: {
-    height: '50%',
-    width: 1,
-    backgroundColor: '#A1A5C1',
-  },
-  mic: {
-    paddingHorizontal: responsiveScreenWidth(1),
-    width: 20,
-    height: 20,
   },
   dataListContainer: {},
   noOfList: {

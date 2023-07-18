@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Notification() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View>
       <Text>Hey there I'm Notification</Text>
     </View>

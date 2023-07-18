@@ -14,9 +14,10 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-const mapsicalImg = require('../../../../assets/images/MapsicleMap.png')
+
 
 const Location = () => {
+  const mapsicalImg = require('../../../../assets/images/MapsicleMap.png')
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>

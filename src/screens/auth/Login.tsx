@@ -17,15 +17,11 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
-import HomePage from '../homepage/HomePage';
 import useAuthServiceHandler from '../../hooks/serviceHandler/AuthServiceHandler';
-
-const vectorImg = require('../../../assets/images/Vector1.png');
-
-// const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
 
 export default function Login() {
+  const vectorImg = require('../../../assets/images/Vector1.png');
   const navigation = useNavigation();
   const {GenerateOtpServiceHandler} = useAuthServiceHandler();
   

@@ -8,8 +8,9 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  Modal,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 
 import {
   responsiveFontSize,
@@ -25,49 +26,61 @@ import TopDiscount from '../homepage/TopDiscount';
 import ExploreNearbyEstate from '../../screens/discover/Category/ExploreNearbyEstate';
 
 import TopLocation from '../discover/Category/TopLocation';
-import TopEstateAgent from '../discover/Category/TopEstateAgent';
-
-const downImg = require('../../../assets/images/Down.png');
-const locatinImg = require('../../../assets/images/Location.png');
-const notificationImg = require('../../../assets/images/Notification.png');
-const ellipseImg = require('../../../assets/images/Ellipse.png');
-const searchImg = require('../../../assets/images/Search.png');
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const HomePage = () => {
+  const notificationImg = require('../../../assets/images/Notification.png');
+  const ellipseImg = require('../../../assets/images/Ellipse.png');
+  const searchImg = require('../../../assets/images/Search.png');
+  const [modalOpen, setModalOpen] = useState(false);
   const navigation = useNavigation();
+
+  const [visible, setVisible] = React.useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const containerStyle = {backgroundColor: 'white', padding: 20};
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <Modal visible={modalOpen} animationType="slide">
+        <View style={styles.hamBurgerMenu}>
+          <TouchableOpacity onPress={() => setModalOpen(false)}>
+            <Ionicons name="close" size={responsiveWidth(10)} />
+          </TouchableOpacity>
+        </View>
+      </Modal>
+      <View style={styles.headerItems}>
+        <TouchableOpacity onPress={() => setModalOpen(true)}>
+          <Ionicons name="menu" size={responsiveWidth(10)} />
+        </TouchableOpacity>
+
+        <View style={styles.profileContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Notification' as never)}>
+            <Image style={styles.notification} source={notificationImg} />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Profile' as never)}>
+            <Image style={styles.profile} source={ellipseImg} />
+          </TouchableOpacity>
+        </View>
+      </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
-          <View style={styles.header}>
-            <View style={styles.headerItems}>
-              <TouchableOpacity style={styles.location}>
-                <Image style={styles.locationImage} source={downImg} />
-                <Text>Jakarta, Indonesia</Text>
-
-                <Image style={styles.locationImage1} source={locatinImg} />
-              </TouchableOpacity>
-
-              <View style={styles.profileContainer}>
-                <TouchableOpacity>
-                  <Image style={styles.notification} source={notificationImg} />
-                </TouchableOpacity>
-
-                <TouchableOpacity>
-                  <Image style={styles.profile} source={ellipseImg} />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-
           <Text style={styles.headerText}>
             Hey,<Text style={styles.subText}> John ! </Text>
             {'\n'}
             Find your dream home
           </Text>
 
-          <TouchableOpacity onPress={() => navigation.navigate('SearchFilterPage' as never)} style={styles.serchContainer}>
-            <Text><Text style={{fontWeight: 'bold'}}>Search </Text>City, Locality, Project, Landmar</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('SearchFilterPage' as never)}
+            style={styles.serchContainer}>
+            <Text>
+              <Text style={{fontWeight: 'bold'}}>Search </Text>City, Locality,
+              Project, Landmark
+            </Text>
             <Image source={searchImg} />
           </TouchableOpacity>
 
@@ -96,12 +109,12 @@ const HomePage = () => {
             </TouchableOpacity>
           </View>
           <TopLocation />
-          {/* <Text style={{color: '#252B5C', fontSize: 18, fontWeight: 'bold'}}>
+          <Text style={{color: '#252B5C', fontSize: 18, fontWeight: 'bold'}}>
             Explore Nearby Estate
-          </Text> */}
-          {/* <View style={styles.dataListContainer}>
+          </Text>
+          <View style={styles.dataListContainer}>
             <ExploreNearbyEstate />
-          </View> */}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -121,9 +134,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  hamBurgerMenu: {
+    flex: 1,
+    marginTop: responsiveScreenWidth(10),
+    // borderWidth: responsiveWidth(0.1),
+    
+  },
 
   container: {
-    paddingHorizontal: responsiveScreenWidth(4),
+    paddingHorizontal: responsiveScreenWidth(5),
+    paddingVertical: responsiveScreenHeight(1.8),
     gap: responsiveHeight(4),
   },
   header: {
@@ -132,26 +152,10 @@ const styles = StyleSheet.create({
   headerItems: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     gap: responsiveScreenWidth(10),
-  },
-
-  location: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 17,
-    gap: 5,
-    borderWidth: 1,
-    borderRadius: 34,
-    borderColor: '#DFDFDF',
-  },
-
-  locationImage: {
-    width: 20,
-    height: 20,
-  },
-  locationImage1: {
-    width: 15,
-    height: 15,
+    paddingHorizontal: responsiveScreenWidth(5),
+    paddingVertical: responsiveScreenHeight(2),
   },
 
   profileContainer: {
@@ -171,6 +175,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: responsiveFontSize(4),
+    paddingHorizontal: responsiveScreenWidth(1.23),
   },
   subText: {
     color: '#234F68',
@@ -185,7 +190,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F4F8',
     borderColor: '#F5F4F8',
     borderRadius: 10,
-    paddingHorizontal: responsiveScreenWidth(3),
+    paddingHorizontal: responsiveScreenWidth(4),
+    marginHorizontal: responsiveScreenWidth(1),
     gap: responsiveScreenWidth(2),
     fontSize: 12,
   },
@@ -193,7 +199,9 @@ const styles = StyleSheet.create({
     flex: 2,
   },
 
-  featuredEstate: {},
+  featuredEstate: {
+    marginHorizontal: responsiveScreenWidth(2),
+  },
   featuredEstateText: {
     flexDirection: 'row',
     alignItems: 'flex-end',

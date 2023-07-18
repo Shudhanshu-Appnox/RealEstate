@@ -7,46 +7,46 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   responsiveScreenHeight,
   responsiveScreenWidth,
-  
 } from 'react-native-responsive-dimensions';
 import ExploreButton from '../../common/buttons/ExploreButton';
 import HeaderWithBackBtn from '../../common/buttons/HeaderWithBackBtn';
-const searchImg = require('../../../../assets/images/Search.png');
-const vector1mg = require('../../../../assets/images/Vector1.png');
-import { useNavigation } from '@react-navigation/native';
+
+import {useNavigation} from '@react-navigation/native';
 
 const SearchModal: React.FC<any> = ({setModalOpen}) => {
+  const searchImg = require('../../../../assets/images/Search.png');
+  const vector1mg = require('../../../../assets/images/Vector1.png');
   const [cityName, setCityName] = useState('');
-  const [title, setTitle] = useState('Co-working Space')
+  const [title, setTitle] = useState('Co-working Space');
   const Navigation = useNavigation();
   const handleSubmit = () => {
-    console.log('Hello') 
-  }
+    
+    Navigation.navigate('ListOfProperty' as never, {cityName, title}),
+      setModalOpen(false);
+  };
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.modalContainer}>
         <TouchableOpacity
           style={styles.containerImg}
           onPress={() => setModalOpen(false)}>
-          <Image
-            style={styles.image}
-            source={vector1mg}
-          />
+          <Image style={styles.image} source={vector1mg} />
         </TouchableOpacity>
 
         <View>
-         
           <TouchableOpacity style={styles.inputContainer}>
-           
-            <TextInput placeholder="Search City / Locality / Projects / Landmarks...." onChangeText={(text) => setCityName(text)}/>
+            <TextInput
+              placeholder="Search City / Locality / Projects / Landmarks...."
+              onChangeText={text => setCityName(text)}
+            />
             <Image source={searchImg} />
           </TouchableOpacity>
         </View>
-        <ExploreButton title="Continue" onPress={() => {Navigation.navigate('ListOfProperty' as never, {cityName , title}), setModalOpen(false)}} />
+        <ExploreButton title="Continue" onPress={() => handleSubmit} />
       </View>
     </SafeAreaView>
   );

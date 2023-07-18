@@ -7,32 +7,35 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import {responsiveFontSize, responsiveHeight, responsiveScreenHeight, responsiveScreenWidth} from 'react-native-responsive-dimensions';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from 'react-native-responsive-dimensions';
+import { useDispatch } from 'react-redux';
+import { UpdateLogout } from '../../redux/reducers/userReducer';
 
-const profileImg = require('../../../assets/images/Ellipse.png');
+
 
 export default function Profile() {
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(UpdateLogout())
+  }
+  const profileImg = require('../../../assets/images/Ellipse.png');
   return (
     <SafeAreaView style={styles.safearea}>
       <View style={styles.container}>
         <TouchableOpacity style={styles.profileContainer}>
           <Image style={styles.profileImg} source={profileImg} />
         </TouchableOpacity>
-        <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity>
-            <Text style={styles.textAuth}>Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.textAuth}> / Register</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={{textAlign: 'center'}}>
-          Login and access millions of advertiser {'\n'} details on single click
-        </Text>
+        
+        <Text style={styles.headerText}>
+            Welcome,<Text style={styles.subText}> John ! </Text>
+          </Text>
         <View style={styles.button__}>
-          <TouchableOpacity
-            style={styles.button}
-            >
+          <TouchableOpacity onPress={handleLogout} style={styles.button}>
             <Text style={styles.btnText}>Logout</Text>
           </TouchableOpacity>
         </View>
@@ -49,17 +52,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    gap: responsiveHeight(2)
+    gap: responsiveHeight(2),
   },
-  profileContainer: {
-
-  },
-  profileImg: {
-    
-  },
-  textAuth:{
+  profileContainer: {},
+  profileImg: {},
+  textAuth: {
     color: '#234F68',
-    fontSize: responsiveFontSize(3)
+    fontSize: responsiveFontSize(3),
   },
   button: {
     padding: 10,
@@ -77,4 +76,10 @@ const styles = StyleSheet.create({
   },
 
   btnText: {color: 'white', fontSize: 16, textAlign: 'center'},
+  headerText: {
+    fontSize: responsiveFontSize(4),
+  },
+  subText: {
+    color: '#234F68',
+  },
 });
