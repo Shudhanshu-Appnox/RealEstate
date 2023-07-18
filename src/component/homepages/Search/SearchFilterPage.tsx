@@ -64,15 +64,16 @@ const SearchFilterPage = ({route}: any) => {
 
   const handleSearch = async () => {
     try {
-      const searchString = `properties/?search=${cityName}&type=${areaType === 'residential' ? "Residential-property" : "Commercial-property"}&price=${sliderValue}&bedrooms=${selectedId}`;
+      const searchString = `search?location=${cityName}&type=${areaType === 'residential' ? "Residential-property" : "Commercial-property"}`;
       const url = `${URL}${searchString}`;
+      console.log(searchString)
       console.log('url', url);
       
       const res = await axios.get(url);
       console.log('res', res);
       const {result} = res.data;
       console.log('result', result);
-      Navigation.navigate('RenderSearchResult' as never, {cityData: result.rows, cityName});
+      Navigation.navigate('RenderSearchResult' as never, {cityData: result, cityName});
     } catch (error) {
       console.log('Error');
     }

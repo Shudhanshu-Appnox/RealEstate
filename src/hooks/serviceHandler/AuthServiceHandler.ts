@@ -6,8 +6,8 @@ import {
   RegisterService,
   LogoutService,
 } from '../../services/auth/authService';
-import { useDispatch } from 'react-redux';
-import { UpdateIsLoginState } from '../../redux/reducers/userReducer';
+import {useDispatch} from 'react-redux';
+import {UpdateIsLoginState} from '../../redux/reducers/userReducer';
 
 const useAuthServiceHandler = () => {
   const Navigation = useNavigation();
@@ -21,9 +21,7 @@ const useAuthServiceHandler = () => {
 
       Alert.alert('OTP', result.generateOTP);
 
-      Navigation.navigate('RegisterWithOTP', { phoneNumber: data.phoneNumber } );
-
-      
+      Navigation.navigate('RegisterWithOTP', {phoneNumber: data.phoneNumber});
     } catch (error: any) {
       console.log('error', error.response.data.error.message);
       Alert.alert('', 'User Not Register!');
@@ -38,37 +36,34 @@ const useAuthServiceHandler = () => {
       if (typeof result === 'string') {
         Navigation.navigate('Register' as never);
       } else {
-        dispatch(UpdateIsLoginState(true));
-        Navigation.navigate('BottomTabNavigation' as never, {result });
-        console.log(result)
+        Navigation.navigate('SuccessPage' as never);
       }
     } catch (error: any) {
-      Alert.alert('Wrong OTP')
-       
+      Alert.alert('Wrong OTP');
     }
   };
 
   const handleRegisterService = async (data: any) => {
     try {
       const res = await RegisterService(data);
-      dispatch(SetIsLoadingState(true));
       const {result} = res.data;
-      console.log(result);
-      Navigation.navigate('BottomTabNavigation' as never);
+      Alert.alert('OTP', result.generateOTP);
+      Navigation.navigate('RegisterWithOTP', {phoneNumber: data.phoneNumber});
     } catch (error: any) {
-      Alert.alert('Error', error.response.data.errors.message);
+      Alert.alert('Error', error.response.data.error.message);
     }
   };
 
   const handleLogoutService = async (data: any) => {
     try {
+      dispatch(SetIsLoadingState(true));
       const res = await LogoutService(data);
       dispatch(SetIsLoadingState(false));
       const {result} = res.data;
-      console.log(result);
       Navigation.navigate('SplashScreen' as never);
     } catch (error: any) {
-      Alert.alert('Error', error.response.data.errors.message);
+      dispatch(SetIsLoadingState(false));
+      Alert.alert('Error', error.response.data.error.message);
     }
   };
 
@@ -84,4 +79,3 @@ export default useAuthServiceHandler;
 function SetIsLoadingState(arg0: boolean): any {
   throw new Error('Function not implemented.');
 }
-

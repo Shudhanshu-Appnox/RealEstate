@@ -27,6 +27,7 @@ interface props {
 };
 
 const CategoryEstate: React.FC<props> = ({cityData}) => {
+  console.log(cityData)
   const heartImage = require('../../../assets/images/Heart.png');
   const starImage = require('../../../assets/images/Star.png');
   const locationImage = require('../../../assets/images/Location.png');

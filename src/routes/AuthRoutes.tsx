@@ -16,6 +16,8 @@ import DetailedPage from '../component/homepages/Search/DetailedPage';
 import Notification from '../screens/profile/Notification';
 import Profile from '../screens/profile/Profile';
 import RenderSearchResult from '../component/homepages/Search/RenderSearchResult';
+import SuccessPage from '../screens/auth/SuccessPage';
+import SuccessPageRegister from '../screens/auth/SuccessPageRegister';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,18 +27,17 @@ const AuthRoute = () => {
       <Stack.Screen
         name="BottomTabNavigation"
         component={BottomTabNavigation}
-        options={{headerShown: false, animation: 'slide_from_bottom'}}
+        options={{headerShown: false,}}
       />
-
       <Stack.Screen
         name="Notification"
         component={Notification}
-        options={{headerShown: false, animation: 'slide_from_bottom'}}
+        options={{headerShown: false,}}
       />
       <Stack.Screen
         name="Profile"
         component={Profile}
-        options={{headerShown: false, animation: 'slide_from_bottom'}}
+        options={{headerShown: false,}}
       />
       <Stack.Screen
         name="FeaturedEstate"

@@ -22,6 +22,8 @@ export const VerifyOTPService = async (data: any) => {
 
 export const RegisterService = async (data: any) => {
   const url = `${URL}user/create`;
+  console.log('url', url);
+  console.log('data', data);
   return axios.post(url, data);
 };
 

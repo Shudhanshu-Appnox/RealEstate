@@ -70,11 +70,11 @@ export default function Register() {
         name: name,
         email: email,
         phoneNumber: phone,
-        type: 'GENERATE',
+        profilePhoto: '',
+        role: 'tenant'
       };
       handleRegisterService(data);
       console.log(data);
-      Alert.alert('Success !');
     }
   };
 

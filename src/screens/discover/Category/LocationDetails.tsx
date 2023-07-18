@@ -16,10 +16,13 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
-import FeaturedCategories from '../../homepage/FeaturedCategories';
-import SettingButton from '../../../component/common/buttons/SettingButton';
 
-export default function LocationDetails() {
+import SettingButton from '../../../component/common/buttons/SettingButton';
+import CategoryEstate from '../../homepage/CategoryEstate';
+
+export default function LocationDetails( {route} : any) {
+  const {data} = route.params;
+  console.log(data);
   const image28 = require('../../../../assets/images/Bali.png');
   const image29 = require('../../../../assets/images/Bali1.png');
   const image30 = require('../../../../assets/images/Bali2.png');
@@ -44,7 +47,7 @@ export default function LocationDetails() {
           </View>
         </View>
         <View style={styles.searchContainer}>
-          <Text style={styles.realestateText}>Bali</Text>
+          <Text style={styles.realestateText}>{data.location}</Text>
           <Text style={styles.text1}>Our recommended real estates in Bali</Text>
 
           <View style={styles.searchInput}>
@@ -77,7 +80,7 @@ export default function LocationDetails() {
                 </TouchableOpacity>
               </View>
             </View>
-            <FeaturedCategories />
+            <CategoryEstate cityData={data}/>
           </View>
         </View>
       </ScrollView>
