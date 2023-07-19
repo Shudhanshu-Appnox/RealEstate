@@ -16,8 +16,7 @@ import DetailedPage from '../component/homepages/Search/DetailedPage';
 import Notification from '../screens/profile/Notification';
 import Profile from '../screens/profile/Profile';
 import RenderSearchResult from '../component/homepages/Search/RenderSearchResult';
-import SuccessPage from '../screens/auth/SuccessPage';
-import SuccessPageRegister from '../screens/auth/SuccessPageRegister';
+import FallBackSearch from '../component/homepages/Search/FallBackSearch';
 
 const Stack = createNativeStackNavigator();
 
@@ -59,6 +58,11 @@ const AuthRoute = () => {
         component={RenderSearchResult}
         options={{headerShown: false}}
       />
+            <Stack.Screen
+        name="FallBackSearch"
+        component={FallBackSearch}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="TopLocation"
         component={TopLocation}
@@ -89,6 +93,8 @@ const AuthRoute = () => {
         component={SearchFilterPage}
         options={{headerShown: false}}
       />
+
+      
       <Stack.Screen
         name="AddCityName"
         component={AddCityName}

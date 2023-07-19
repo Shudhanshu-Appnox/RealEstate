@@ -47,7 +47,7 @@ export default function LocationDetails( {route} : any) {
           </View>
         </View>
         <View style={styles.searchContainer}>
-          <Text style={styles.realestateText}>{data.location}</Text>
+          <Text style={styles.realestateText}>{data}</Text>
           <Text style={styles.text1}>Our recommended real estates in Bali</Text>
 
           <View style={styles.searchInput}>
@@ -80,7 +80,7 @@ export default function LocationDetails( {route} : any) {
                 </TouchableOpacity>
               </View>
             </View>
-            <CategoryEstate cityData={data}/>
+            {/* <CategoryEstate cityData={data}/> */}
           </View>
         </View>
       </ScrollView>

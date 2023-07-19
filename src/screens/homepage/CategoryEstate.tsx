@@ -19,7 +19,7 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {SearchPropertyService} from '../../services/properties';
+// import {SearchPropertyService} from '../../services/properties';
 import {useNavigation} from '@react-navigation/native';
 
 interface props {
@@ -51,9 +51,11 @@ const CategoryEstate: React.FC<props> = ({cityData}) => {
   
   const Item = ({data}: any) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate('DetailedPage' as never, {data})}
+      onPress={() => navigation.navigate('DetailedPage' as never, data)}
       style={styles.itemContainer}>
-      <View style={styles.featuredCard}>
+      <View style={styles.featuredCard} id={data.id}>
+      <Text style={styles.detailesHeadertext}>{data.title}</Text>
+    
         <ImageBackground style={styles.imageContainer} source={mainImage}>
           <TouchableOpacity style={styles.heartContainer}>
             <Image style={styles.heart} source={heartImage} />
@@ -67,17 +69,15 @@ const CategoryEstate: React.FC<props> = ({cityData}) => {
         </ImageBackground>
 
         <View style={styles.details}>
-          <View style={styles.detailsHeader}>
-            <Text style={styles.detailesHeadertext}>{data.title}</Text>
+        <Text style={styles.description}>{data.description}</Text>
+            
             <View style={styles.ratingContainer}>
-              <Image style={styles.star} source={starImage} />
-              <Text style={{fontSize: 10}}>{data.rating}</Text>
+              
               <Image style={styles.star} source={locationImage} />
-              <Text style={{fontSize: 10}}>{data.location}</Text>
+              <Text style={styles.location}>{data.location}</Text>
             </View>
           </View>
         </View>
-      </View>
     </TouchableOpacity>
   );
 
@@ -85,7 +85,7 @@ const CategoryEstate: React.FC<props> = ({cityData}) => {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{alignItems: 'center'}} showsVerticalScrollIndicator={false} >
         {
-          cityData?.map((item: any) => <Item data={item} />)
+          cityData?.map((item: any) => <Item key={item.id} data={item} />)
         }
       </ScrollView>
     </SafeAreaView>
@@ -128,17 +128,23 @@ const styles = StyleSheet.create({
     width: responsiveWidth(3),
     height: responsiveHeight(1.5),
   },
-  // padding: responsiveHeight(2),
+
 
   details: {
     paddingHorizontal: responsiveScreenWidth(5),
     paddingVertical: responsiveScreenHeight(2.4),
+    gap: responsiveHeight(2)
+  },
+  description: {
+    fontSize: responsiveFontSize(2),
+    
   },
 
   buttonText: {
     color: '#fff',
     textAlign: 'center',
     fontSize: responsiveFontSize(1.6),
+    fontWeight: 'bold'
   },
   ratingContainer: {
     flexDirection: 'row',
@@ -146,24 +152,28 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   star: {
-    width: 9,
-    height: 9,
+    width: responsiveWidth(5),
+    height: responsiveHeight(2.5)
   },
-  price: {},
-  detailsHeader: {
-    width: responsiveScreenWidth(30),
-    gap: responsiveHeight(1),
-    // marginHorizontal: responsiveScreenWidth(2),
-    // marginVertical: responsiveScreenHeight(1),
+  location: {
+    fontSize: responsiveFontSize(3)
   },
+ 
   detailesHeadertext: {
-    fontSize: 12,
+    marginTop: responsiveScreenHeight(3),
+    marginLeft: responsiveScreenWidth(6),
+    fontSize: responsiveFontSize(3),
   },
   map: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  button: {},
+  button: {
+    backgroundColor: '#8BC83F',
+    borderRadius: responsiveWidth(10),
+    paddingHorizontal: responsiveScreenWidth(2),
+    paddingVertical: responsiveScreenHeight(1)
+  },
 });
 
 export default CategoryEstate;

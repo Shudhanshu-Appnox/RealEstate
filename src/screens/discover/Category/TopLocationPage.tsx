@@ -86,7 +86,7 @@ const TopLocationPage = () => {
   const Item: React.FC<any> = ({data}) => (
     <TouchableOpacity
       style={styles.featuredCard}
-      onPress={() => Navigation.navigate('LocationDetails' as never, {data})}>
+      onPress={() => Navigation.navigate('LocationDetails' as never, {data : data.location})}>
       <ImageBackground style={styles.imageContainer} source={data.image}>
         <TouchableOpacity style={styles.noContainer}>
           <Text style={{color: 'white'}}>#{data.id}</Text>

@@ -62,7 +62,6 @@ const labels = {
 
 const OTP: React.FC<any> = ({route}) => {
   const {phoneNumber} = route.params;
-  console.log(route.params);
   const {VerifyOTPServiceHandler, GenerateOtpServiceHandler} = useAuthServiceHandler();
   const isKeyboardVisible = useKeyboardVisibleListener();
   const [loading, setLoading] = useState(false);
