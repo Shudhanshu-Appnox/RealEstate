@@ -29,8 +29,7 @@ import axios from 'axios';
 const SearchFilterPage = ({route}: any) => {
   // const [selectedBedroom, setSelectedBedroom] = useState(1);
   const [areaType, setAreaType] = useState<'residential' | 'commercial'>('residential');
-  const [buy, setBuy] = useState(true);
-  const [rent, setRent] = useState(false);
+  const [lookingTo, setLookingTo] = useState<'Buy' | 'Rent / Lease'>('Buy');
   const [bgColor, setbgColor] = useState(false);
   const [bgColor1, setbgColor1] = useState(false);
   const [bgColor2, setbgColor2] = useState(false);
@@ -64,18 +63,21 @@ const SearchFilterPage = ({route}: any) => {
 
   const handleSearch = async () => {
     try {
-      const searchString = `search?location=${cityName}&type=${areaType === 'residential' ? "Residential-property" : "Commercial-property"}`;
+      const searchString = `search?location=${cityName}&type=${areaType === 'residential' ? "Residential-property" : "Commercial-property"}&lookingTo=${lookingTo === 'Buy' ? 'Buy' : 'Rent/Lease'}&berooms=${selectedId}&readyToMove=${}`;
       const url = `${URL}${searchString}`;
       console.log(searchString)
       console.log('url', url);
       
       const res = await axios.get(url);
-      console.log('res', res);
+      // console.log('res', res);
       const {result} = res.data;
-      console.log('result', result);
+      // console.log('result', result);
       Navigation.navigate('RenderSearchResult' as never, {cityData: result, cityName});
-    } catch (error) {
-      console.log('Error');
+    } catch (error : any) {
+      const sendMessage = error.response.data.error.message;
+      // console.log(sendMessage)
+      Navigation.navigate('FallBackSearch' as never , {sendMessage })
+      // console.log('Error', error.response.data.error.message);
     }
   }
 
@@ -145,16 +147,16 @@ const SearchFilterPage = ({route}: any) => {
           <View style={styles.lookingTo}>
             <TouchableOpacity
               onPress={() => {
-                setBuy(true), setRent(false);
+                setLookingTo('Buy')
               }}
-              style={buy ? styles.pressedbuyrent : styles.buyrent}>
+              style={lookingTo === 'Buy' ? styles.pressedbuyrent : styles.buyrent}>
               <Text>Buy</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                setBuy(false), setRent(true);
+                setLookingTo('Rent / Lease')
               }}
-              style={rent ? styles.pressedbuyrent : styles.buyrent}>
+              style={lookingTo === 'Rent / Lease' ? styles.pressedbuyrent : styles.buyrent}>
               <Text>Rent/Lease</Text>
             </TouchableOpacity>
           </View>
