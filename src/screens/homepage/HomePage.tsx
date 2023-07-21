@@ -32,14 +32,11 @@ const HomePage = () => {
   const notificationImg = require('../../../assets/images/Notification.png');
   const ellipseImg = require('../../../assets/images/Ellipse.png');
   const searchImg = require('../../../assets/images/Search.png');
-  const [modalOpen, setModalOpen] = useState(false);
+
   const navigation = useNavigation();
 
-  const [visible, setVisible] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
-  const containerStyle = {backgroundColor: 'white', padding: 20};
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Modal visible={modalOpen} animationType="slide">
@@ -56,13 +53,13 @@ const HomePage = () => {
 
         <View style={styles.profileContainer}>
           <TouchableOpacity
+            onPress={() => navigation.navigate('PostProperty' as never)}
+            style={styles.postProperty}>
+            <Text style={styles.postPropertyText}>Post property</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => navigation.navigate('Notification' as never)}>
             <Image style={styles.notification} source={notificationImg} />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Profile' as never)}>
-            <Image style={styles.profile} source={ellipseImg} />
           </TouchableOpacity>
         </View>
       </View>
@@ -78,7 +75,7 @@ const HomePage = () => {
             onPress={() => navigation.navigate('SearchFilterPage' as never)}
             style={styles.serchContainer}>
             <Text>
-              <Text style={{fontWeight: 'bold'}}>Search </Text>City, Locality,
+              <Text style={{fontWeight: 'bold'}}>Search :   </Text>City, Locality,
               Project, Landmark
             </Text>
             <Image source={searchImg} />
@@ -100,16 +97,16 @@ const HomePage = () => {
           </View>
           <FeaturedCategories />
           <View style={styles.toplocation}>
-            <Text style={{fontSize: 20, color: '#252B5C', fontWeight: '700'}}>
+            <Text style={styles.featuredEstateHeaderText}>
               Top Location
             </Text>
             <TouchableOpacity
               onPress={() => navigation.navigate('TopLocationPage' as never)}>
-              <Text style={{color: '#234F68', fontSize: 14}}>explore</Text>
+              <Text style={styles.textAll}>explore</Text>
             </TouchableOpacity>
           </View>
           <TopLocation />
-          <Text style={{color: '#252B5C', fontSize: 18, fontWeight: 'bold'}}>
+          <Text style={styles.featuredEstateHeaderText}>
             Explore Nearby Estate
           </Text>
           <View style={styles.dataListContainer}>
@@ -138,7 +135,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: responsiveScreenWidth(10),
     // borderWidth: responsiveWidth(0.1),
-    
   },
 
   container: {
@@ -160,7 +156,17 @@ const styles = StyleSheet.create({
 
   profileContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
     gap: responsiveScreenWidth(3),
+  },
+  postProperty: {
+    backgroundColor: '#234F68',
+    padding: responsiveHeight(1),
+    borderRadius: responsiveWidth(10),
+  },
+  postPropertyText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 
   notification: {
@@ -183,17 +189,16 @@ const styles = StyleSheet.create({
   serchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     height: responsiveScreenHeight(7),
     width: responsiveScreenWidth(90),
     borderWidth: 0,
     backgroundColor: '#F5F4F8',
     borderColor: '#F5F4F8',
     borderRadius: 10,
-    paddingHorizontal: responsiveScreenWidth(4),
-    marginHorizontal: responsiveScreenWidth(1),
+    paddingHorizontal: responsiveScreenWidth(1.9),
     gap: responsiveScreenWidth(2),
-    fontSize: 12,
+    fontSize: responsiveFontSize(2),
   },
   input: {
     flex: 2,

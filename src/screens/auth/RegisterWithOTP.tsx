@@ -179,7 +179,9 @@ const OTP: React.FC<any> = ({route}) => {
 
   return (
     <View style={styles.mainContainer}>
+      <View style={{paddingHorizontal: responsiveScreenWidth(4)}}>
       <HeaderWithBackBtn />
+      </View>
       <View style={styles.body}>
         {
           <View style={styles.container}>

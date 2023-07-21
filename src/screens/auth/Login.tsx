@@ -28,11 +28,11 @@ export default function Login() {
   const [phone, setPhone] = useState('');
 
   const [phoneValidError, setPhoneValidError] = useState('');
-  const [isValid, setIsValid] = useState('');
+
   
 
   const [isFocus, setIsFocus] = useState(false);
-  const [onBlur, setOnBlur] = useState(true);
+
 
   const Validation = () => {
     if (phone.length < 10) {

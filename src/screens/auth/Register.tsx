@@ -13,12 +13,15 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
   responsiveFontSize,
+  responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
 import useAuthServiceHandler from '../../hooks/serviceHandler/AuthServiceHandler';
+import HeaderWithBackBtn from '../../component/common/buttons/HeaderWithBackBtn';
 
 
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+
 export default function Register() {
   const navigation = useNavigation();
   const {handleRegisterService} = useAuthServiceHandler();
@@ -78,17 +81,31 @@ export default function Register() {
     }
   };
 
+
+  function isValidFullName(fullName : string) {
+    const fullNamePattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+    return fullNamePattern.test(fullName);
+  }
+  
+  const OnHandleChangeName = (value: string | any[]) => {
+    if (!value.length) {
+      setNameValidError('Required')
+      return false;
+    } else if (isValidFullName(value)){
+      setNameValidError('Enter valid Name !');
+      return false;
+    } else {
+      setNameValidError('');
+      return true;
+    }
+  };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.containerImg}>
-          <Image
-            style={styles.image}
-            source={vectorImg}
-          />
-        </TouchableOpacity>
+       <View style={styles.headerBackButton}>
+       <HeaderWithBackBtn />
+       </View>
 
         <Text style={styles.textH}>
           Create your<Text style={{color: '#1F4C6B'}}> account</Text>
@@ -108,6 +125,7 @@ export default function Register() {
               autoCorrect={false}
               autoCapitalize="none"
               onChangeText={value => {
+                OnHandleChangeName(value);
                 setName(value);
               }}
               onFocus={() => setIsFocus(true)}></TextInput>
@@ -184,24 +202,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     textAlign: 'center',
     paddingTop: 0,
-    padding: 20,
+    paddingHorizontal: responsiveScreenWidth(5)
   },
 
-  containerImg: {
-    borderWidth: 1,
-    borderRadius: responsiveScreenWidth(7),
-    backgroundColor: '#F5F4F8',
-    borderColor: '#F5F4F8',
-    width: responsiveScreenWidth(12),
-    height: responsiveScreenWidth(12),
-    alignItems: 'center',
-    justifyContent: 'center',
+  headerBackButton: {
+    marginVertical: responsiveScreenHeight(3),
+    marginBottom: responsiveScreenHeight(5)
   },
 
-  image: {
-    width: 5,
-    height: 10,
-  },
+  
   imagePhone: {
     width: 20,
     height: 20,

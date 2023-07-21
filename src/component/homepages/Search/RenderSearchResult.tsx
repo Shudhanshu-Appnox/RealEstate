@@ -13,7 +13,7 @@ const RenderSearchResult:React.FC<any> = ({route}) => {
           <HeaderWithBackBtn />
           <Text style={styles.typeText}>
             {/* <Text style={styles.typeTitle}>{route.params.title} </Text> */}
-            Properties in
+            Searched Properties in
             <Text style={styles.cityname}> {cityName}</Text>
           </Text>
         </View>
@@ -34,12 +34,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingBottom: responsiveScreenHeight(2),
-        paddingRight: responsiveScreenWidth(18)
+        marginHorizontal: responsiveScreenWidth(1.8),
+        paddingBottom: responsiveScreenHeight(3),
+        paddingRight: responsiveScreenWidth(18),
+        
     },
     typeText: {
-        paddingTop: responsiveScreenHeight(1.5),
-        fontSize: responsiveFontSize(3),
+      marginTop: responsiveScreenHeight(0.5),
+      marginLeft: responsiveScreenWidth(2),
+        paddingTop: responsiveScreenHeight(1),
+        fontSize: responsiveFontSize(2.5),
     },
     typeTitle: {
     

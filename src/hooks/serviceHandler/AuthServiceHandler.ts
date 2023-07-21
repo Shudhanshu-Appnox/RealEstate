@@ -16,16 +16,17 @@ const useAuthServiceHandler = () => {
   const GenerateOtpServiceHandler = async (data: any) => {
     try {
       const res = await GenerateOTPService(data);
-
       const {result} = res.data;
-
       Alert.alert('OTP', result.generateOTP);
-
       Navigation.navigate('RegisterWithOTP', {phoneNumber: data.phoneNumber});
     } catch (error: any) {
-      console.log('error', error.response.data.error.message);
-      Alert.alert('', 'User Not Register!');
-      Navigation.navigate('Register' as never);
+      const ErrorMsg = error.response.data.error.message;
+      if(ErrorMsg === 'Phone number is not verified'){
+        Navigation.navigate('RegisterWithOTP', {phoneNumber: data.phoneNumber});
+      }else{
+        Alert.alert('', 'User Not Register!');
+        Navigation.navigate('Register' as never);
+      }
     }
   };
 

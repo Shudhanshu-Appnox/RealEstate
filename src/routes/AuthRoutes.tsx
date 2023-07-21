@@ -17,6 +17,8 @@ import Notification from '../screens/profile/Notification';
 import Profile from '../screens/profile/Profile';
 import RenderSearchResult from '../component/homepages/Search/RenderSearchResult';
 import FallBackSearch from '../component/homepages/Search/FallBackSearch';
+import PostProperty from '../screens/homepage/PostProperty/PostProperty';
+import PostPropertySecond from '../screens/homepage/PostProperty/PostPropertySecond';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +33,16 @@ const AuthRoute = () => {
       <Stack.Screen
         name="Notification"
         component={Notification}
+        options={{headerShown: false,}}
+      />
+      <Stack.Screen
+        name="PostProperty"
+        component={PostProperty}
+        options={{headerShown: false,}}
+      />
+      <Stack.Screen
+        name="PostPropertySecond"
+        component={PostPropertySecond}
         options={{headerShown: false,}}
       />
       <Stack.Screen

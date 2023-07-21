@@ -30,6 +30,7 @@ const SearchFilterPage = ({route}: any) => {
   // const [selectedBedroom, setSelectedBedroom] = useState(1);
   const [areaType, setAreaType] = useState<'residential' | 'commercial'>('residential');
   const [lookingTo, setLookingTo] = useState<'Buy' | 'Rent / Lease'>('Buy');
+  const [readyToMove, setReadyToMove] = useState<'Yes' | 'No'>('Yes');
   const [bgColor, setbgColor] = useState(false);
   const [bgColor1, setbgColor1] = useState(false);
   const [bgColor2, setbgColor2] = useState(false);
@@ -38,8 +39,6 @@ const SearchFilterPage = ({route}: any) => {
   const [selectedId, setSelectedId] = useState(1);
   const [bedrooms, setBedrooms] = useState(false);
   const {cityName} = useSelector((store: any) => store.filter);
-  const [yes, setYes] = useState(false);
-  const [no, setNo] = useState(false);
   const Navigation = useNavigation();
   // const [searchString, setSearchString] = useState(`${cityName}&type=${areaType === 'residential' ? "Residential-property" : "Commercial-property"}&price=${sliderValue}`);
 
@@ -63,7 +62,7 @@ const SearchFilterPage = ({route}: any) => {
 
   const handleSearch = async () => {
     try {
-      const searchString = `search?location=${cityName}&type=${areaType === 'residential' ? "Residential-property" : "Commercial-property"}&lookingTo=${lookingTo === 'Buy' ? 'Buy' : 'Rent/Lease'}&berooms=${selectedId}&readyToMove=${}`;
+      const searchString = `search?location=${cityName}&type=${areaType === 'residential' ? "Residential-property" : "Commercial-property"}&lookingTo=${lookingTo === 'Buy' ? 'Buy' : 'Rent/Lease'}&bedrooms=${selectedId}&readyToMove=${readyToMove === 'Yes' ? 'Yes' : 'No'}&price=${sliderValue}`;
       const url = `${URL}${searchString}`;
       console.log(searchString)
       console.log('url', url);
@@ -190,10 +189,10 @@ const SearchFilterPage = ({route}: any) => {
           </View>
           <Slider
             maximumValue={10000000}
-            minimumValue={5000}
+            minimumValue={0}
             minimumTrackTintColor="#8BC83F"
             maximumTrackTintColor="gray"
-            step={500000}
+            step={100000}
             value={sliderValue}
             onValueChange={sliderValue => setSliderValue(sliderValue)}
           />
@@ -264,18 +263,16 @@ const SearchFilterPage = ({route}: any) => {
           <View style={{flexDirection: 'row', gap: responsiveWidth(5)}}>
             <TouchableOpacity
               onPress={() => {
-                setYes(true);
-                setNo(false);
+                setReadyToMove('Yes')
               }}
-              style={yes ? styles.yes : styles.no}>
+              style={readyToMove === 'Yes' ? styles.yes : styles.no}>
               <Text>Yes</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                setYes(false);
-                setNo(true);
+                setReadyToMove('No')
               }}
-              style={no ? styles.yes : styles.no}>
+              style={readyToMove === 'No' ? styles.yes : styles.no}>
               <Text>No</Text>
             </TouchableOpacity>
           </View>
@@ -441,15 +438,15 @@ const styles = StyleSheet.create({
   },
   yes: {
     borderWidth: responsiveWidth(0.3),
-    borderRadius: responsiveWidth(18),
+    borderRadius: responsiveWidth(4),
     borderColor: '#8BC83F',
-    padding: 8,
+    padding: responsiveWidth(2),
   },
   no: {
-    borderWidth: 1,
-    borderRadius: responsiveWidth(18),
+    borderWidth: responsiveWidth(0.3),
+    borderRadius: responsiveWidth(4),
     borderColor: 'gray',
-    padding: 8,
+    padding: responsiveWidth(2)
   },
   button: {
     paddingHorizontal: responsiveScreenWidth(5),

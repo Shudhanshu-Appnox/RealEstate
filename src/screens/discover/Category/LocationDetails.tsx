@@ -80,7 +80,7 @@ export default function LocationDetails( {route} : any) {
                 </TouchableOpacity>
               </View>
             </View>
-            {/* <CategoryEstate cityData={data}/> */}
+            <CategoryEstate cityData={data}/>
           </View>
         </View>
       </ScrollView>

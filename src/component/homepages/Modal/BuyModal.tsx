@@ -16,7 +16,6 @@ import {
 import ExploreButton from '../../common/buttons/ExploreButton';
 import {useNavigation} from '@react-navigation/native';
 
-
 const BuyModal: React.FC<any> = ({setModalOpen}) => {
   const searchImg = require('../../../../assets/images/Search.png');
   const vector1mg = require('../../../../assets/images/Vector1.png');
@@ -35,7 +34,7 @@ const BuyModal: React.FC<any> = ({setModalOpen}) => {
 
   const validation = () => {
     if (cityName.length < 4) {
-      setCityError('Enter valid city name !');
+      setCityError('Enter city name !');
       return false;
     } else {
       setCityError('');
@@ -107,20 +106,16 @@ const BuyModal: React.FC<any> = ({setModalOpen}) => {
         </View>
         <View>
           <Text style={styles.pb10}>City name</Text>
-          <TouchableOpacity
-            onPress={() => setText(true)}
-            style={styles.inputContainer}>
-            {!text ? (
-              <Text style={styles.where}>Where?</Text>
-            ) : (
-              <TextInput
-                placeholder="Enter City Name"
-                onChangeText={(text) => setCityName(text)}
-              />
-            )}
+
+          <View style={styles.inputCityName}>
+            <TextInput
+              placeholder="Enter City Name"
+              onChangeText={text => setCityName(text)}
+            />
 
             <Image source={searchImg} />
-          </TouchableOpacity>
+          </View>
+
           {cityError ? (
             <Text style={{color: 'red', textAlign: 'right'}}>{cityError}</Text>
           ) : null}
@@ -149,6 +144,11 @@ const styles = StyleSheet.create({
     height: 10,
   },
   pb10: {paddingBottom: 10},
+  inputCityName: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
   modalOpen: {},
   modal: {
     borderWidth: 1,
