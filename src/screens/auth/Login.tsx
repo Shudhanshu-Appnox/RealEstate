@@ -8,7 +8,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -32,6 +32,7 @@ export default function Login() {
   
 
   const [isFocus, setIsFocus] = useState(false);
+  
 
 
   const Validation = () => {
@@ -69,7 +70,7 @@ export default function Login() {
       return true;
     }
   };
-
+ 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>
@@ -99,11 +100,13 @@ export default function Login() {
             placeholder="Phone "
             value={phone}
             keyboardType="number-pad"
+            
             onChangeText={value => {
               OnHandleChange(value);
               setPhone(value);
             }}
             onFocus={() => setIsFocus(true)}
+            
           />
         </View>
         {phoneValidError ? (

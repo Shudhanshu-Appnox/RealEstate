@@ -383,21 +383,25 @@ const styles = StyleSheet.create({
     gap: responsiveHeight(1),
   },
   typeOfPropertyStyle: {
+    alignSelf: 'flex-start',
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: responsiveWidth(18),
     borderColor: 'gray',
-    paddingHorizontal: responsiveScreenWidth(5),
+    paddingHorizontal: responsiveScreenWidth(2),
     gap: 5,
   },
   typeOfPropertyStyleColor: {
+    alignSelf: 'flex-start',
+
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: responsiveWidth(0.3),
     borderRadius: responsiveWidth(18),
     borderColor: '#8BC83F',
-    paddingHorizontal: responsiveScreenWidth(5),
+    paddingHorizontal: responsiveScreenWidth(2),
+  
     gap: 5,
   },
 

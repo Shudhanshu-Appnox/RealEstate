@@ -86,6 +86,19 @@ export default function Register() {
     const fullNamePattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
     return fullNamePattern.test(fullName);
   }
+
+  const OnHandleChangeNumber = (value: string | any[]) => {
+    if (!value.length) {
+      setPhoneValidError('Required')
+      return false;
+    } else if (value.length < 10 || value.length > 10){
+      setPhoneValidError('Enter valid number !');
+      return false;
+    } else {
+      setPhoneValidError('');
+      return true;
+    }
+  };
   
   const OnHandleChangeName = (value: string | any[]) => {
     if (!value.length) {
@@ -164,7 +177,7 @@ export default function Register() {
               value={phone}
               keyboardType="number-pad"
               onChangeText={value => {
-                // OnHandleChange(value);
+                OnHandleChangeNumber(value);
                 setPhone(value);
               }}
               onFocus={() => setIsFocus(true)}

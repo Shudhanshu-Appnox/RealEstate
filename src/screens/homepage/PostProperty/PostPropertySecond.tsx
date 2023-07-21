@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import HeaderWithBackBtn from '../../../component/common/buttons/HeaderWithBackBtn';
 import {
   responsiveFontSize,
@@ -19,8 +19,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {UpdateCityName} from '../../../redux/reducers/filterReducer';
+import OptionBtn from '../../../component/common/buttons/OptionBtn';
+import ExploreButton from '../../../component/common/buttons/ExploreButton';
 
 const PostPropertySecond = () => {
+  const [noOfRooms, setNoOfRooms] = useState('');
+  const [noOfBathRooms, setNoOfBathRooms] = useState('');
+  const [noOfBalconies, setNoOfBalconies] = useState('');
   const dispatch = useDispatch();
   const handleCityName = () => {
     dispatch(UpdateCityName(''));
@@ -28,6 +33,14 @@ const PostPropertySecond = () => {
 
   const navigation = useNavigation();
   const {cityName} = useSelector((store: any) => store.filter);
+
+  const NoOfRooms = ['1', '2', '3', '4', '5', '5+'];
+  const NoOfBathRooms = ['1', '2', '3', '4+',];
+  const NoOfBalconies = ['1', '2', '3', 'More than 3',];
+
+  const handleNext = () => {
+    navigation.navigate('PostPropertyThird' as never)
+  }
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <View style={styles.container}>
@@ -61,10 +74,54 @@ const PostPropertySecond = () => {
         </View>
         <View>
           <Text style={styles.locatedText}>Add Rooms Details</Text>
-          <View>
-            <Text></Text>
-            
+          <Text style={styles.noOfBedroomsText}>No. of bedrooms</Text>
+          <View style={styles.noOfBedrooms}>
+            {NoOfRooms.map(option => (
+              <OptionBtn
+                key={option}
+                label={option}
+                btnPressHandler={setNoOfRooms}
+                style={
+                  noOfRooms === option
+                    ? styles.colored
+                    : styles.notColored
+                }
+              />
+            ))}
           </View>
+          <Text style={styles.noOfBedroomsText}>No. of Bathrooms</Text>
+          <View style={styles.noOfBedrooms}>
+            {NoOfBathRooms.map(option => (
+              <OptionBtn
+                key={option}
+                label={option}
+                btnPressHandler={setNoOfBathRooms}
+                style={
+                  noOfBathRooms === option
+                    ? styles.colored
+                    : styles.notColored
+                }
+              />
+            ))}
+          </View>
+          <Text style={styles.noOfBedroomsText}>No. of Balconies</Text>
+          <View style={styles.noOfBedrooms}>
+            {NoOfBalconies.map(option => (
+              <OptionBtn
+                key={option}
+                label={option}
+                btnPressHandler={setNoOfBalconies}
+                style={
+                  noOfBalconies === option
+                    ? styles.colored
+                    : styles.notColored
+                }
+              />
+            ))}
+          </View>
+         <View style={{marginTop: responsiveHeight(3)}}>
+         <ExploreButton onPress={() => handleNext()} title='Next'/>
+         </View>
         </View>
       </View>
     </SafeAreaView>
@@ -76,13 +133,14 @@ export default PostPropertySecond;
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: responsiveScreenWidth(4),
-    gap: responsiveHeight(3)
+    gap: responsiveHeight(3),
   },
   buttonBack: {
     marginBottom: responsiveScreenHeight(6),
-
   },
-  headerText: {},
+  headerText: {
+    gap: responsiveHeight(2)
+  },
   steps: {
     fontSize: responsiveScreenFontSize(1.9),
     fontWeight: '400',
@@ -92,15 +150,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   locatedText: {
-    fontSize: responsiveFontSize(2.4),
-    fontWeight: '500'
+    
   },
   addCityNameContainer: {
     flexDirection: 'row',
     marginTop: responsiveHeight(1),
     borderWidth: responsiveWidth(0.1),
     borderRightWidth: 0,
-    // marginHorizontal: responsiveScreenWidth(5),
     padding: 5,
     gap: responsiveWidth(5),
   },
@@ -127,5 +183,29 @@ const styles = StyleSheet.create({
   },
   removeFont: {
     fontSize: responsiveFontSize(2.5),
+  },
+  notColored: {
+    alignSelf: 'flex-start',
+    borderWidth: responsiveWidth(0.3),
+    borderRadius: responsiveWidth(20),
+    borderColor: 'gray',
+    paddingHorizontal: responsiveWidth(5),
+    paddingVertical: responsiveScreenHeight(1.9)
+  },
+  colored: {
+    alignSelf: 'flex-start',
+    borderWidth: responsiveWidth(0.5),
+    borderRadius: responsiveWidth(20),
+    borderColor: '#8BC83F',
+    paddingHorizontal: responsiveWidth(5),
+    paddingVertical: responsiveScreenHeight(1.9)
+  },
+  noOfBedroomsText: {
+    marginVertical: responsiveScreenHeight(2)
+  },
+  noOfBedrooms: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: responsiveWidth(3)
   },
 });

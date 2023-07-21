@@ -16,28 +16,29 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import TypeOfProperty from './TypeOfProperty';
 import ExploreButton from '../../../component/common/buttons/ExploreButton';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import OptionBtn from '../../../component/common/buttons/OptionBtn';
 
 const PostProperty = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [areaType, setAreaType] = useState<'residential' | 'commercial'>(
-    'residential',
-  );
-  const [lookingTo, setLookingTo] = useState<'Sell' | 'Rent / Lease'>('Sell');
-  const navigation = useNavigation()
+  const [areaType, setAreaType] = useState<string>('residential');
+  const [lookingTo, setLookingTo] = useState<string>('Sell');
+  const [propertyType, setPropertyType] = useState<string>('');
+  const navigation = useNavigation();
 
-//   const Validate = () => {
-
-//   }
   const handleNext = () => {
-    navigation.navigate('PostPropertySecond' as never)
-    // const isValid = Validate()
-    // if(isValid) {
-
-    // }
-  }
+    navigation.navigate('PostPropertySecond' as never);
+  };
+  const LookingOption = ['Sell', 'Rent / Lease'];
+  const WhatKindOfProperty = ['residential', 'commercial'];
+  const selectProperty = [
+    'Apartment',
+    'Independent House/Villa',
+    'Independent/Builder Floor',
+    'Plot/Land',
+    '1 RK/ Studio Aprtment',
+  ];
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <Modal visible={modalOpen} animationType="slide">
@@ -48,73 +49,65 @@ const PostProperty = () => {
         </View>
       </Modal>
       <View style={styles.headerItems}>
-       <View style={styles.hamBurger}>
-       <TouchableOpacity onPress={() => setModalOpen(true)}>
-          <Ionicons name="menu" size={responsiveWidth(10)} />
-        </TouchableOpacity>
-       </View>
+        <View style={styles.hamBurger}>
+          <TouchableOpacity onPress={() => setModalOpen(true)}>
+            <Ionicons name="menu" size={responsiveWidth(10)} />
+          </TouchableOpacity>
+        </View>
         <View style={styles.basicDetails}>
-          <Text style={styles.steps}>Step 1 of 3</Text>
-          <Text style={styles.basicDetailsText}>Add Basic Details</Text>
-          <Text>Your Intent, Property type & Contact details</Text>
+          <View style={{gap: responsiveScreenHeight(1)}}>
+            <Text style={styles.steps}>Step 1 of 3</Text>
+            <Text style={styles.basicDetailsText}>Add Basic Details</Text>
+            <Text>Your Intent, Property type & Contact details</Text>
+          </View>
           <View style={styles.main}>
             <Text style={styles.pb10}>You're Looking to ? </Text>
             <View style={styles.lookingTo}>
-              <TouchableOpacity
-                onPress={() => {
-                  setLookingTo('Sell');
-                }}
-                style={
-                  lookingTo === 'Sell'
-                    ? styles.pressedSellrent
-                    : styles.Sellrent
-                }>
-                <Text>Sell</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setLookingTo('Rent / Lease');
-                }}
-                style={
-                  lookingTo === 'Rent / Lease'
-                    ? styles.pressedSellrent
-                    : styles.Sellrent
-                }>
-                <Text>Rent/Lease</Text>
-              </TouchableOpacity>
+              {LookingOption?.map(option => (
+                <OptionBtn
+                  key={option}
+                  label={option}
+                  btnPressHandler={setLookingTo}
+                  style={
+                    lookingTo === option
+                      ? styles.pressedSellrent
+                      : styles.Sellrent
+                  }
+                />
+              ))}
             </View>
             <Text>What King Of Property ?</Text>
             <View style={styles.propertyTYpe}>
-              <TouchableOpacity
-                onPress={() => {
-                  setAreaType('residential');
-                }}
-                style={
-                  areaType === 'residential'
-                    ? styles.typeColor
-                    : styles.residential
-                }>
-                <Text>Residential</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setAreaType('commercial');
-                }}
-                style={
-                  areaType === 'commercial'
-                    ? styles.typeColor
-                    : styles.residential
-                }>
-                <Text>Commercial</Text>
-              </TouchableOpacity>
+              {WhatKindOfProperty?.map(option => (
+                <OptionBtn
+                  key={option}
+                  label={option}
+                  btnPressHandler={setAreaType}
+                  style={
+                    areaType === option ? styles.typeColor : styles.residential
+                  }
+                />
+              ))}
+            </View>
+            <Text>Select Property Type</Text>
+            <View style={styles.typeOfProperty}>
+              {selectProperty?.map(option => (
+                <OptionBtn
+                  key={option}
+                  label={option}
+                  btnPressHandler={setPropertyType}
+                  style={
+                    propertyType === option
+                      ? styles.typeColor
+                      : styles.noTypeColor
+                  }
+                />
+              ))}
             </View>
           </View>
-          <TypeOfProperty />
-          <View style={{marginTop: responsiveHeight(4)}}>
+
           <ExploreButton onPress={() => handleNext()} title="Next" />
-          </View>
         </View>
-        
       </View>
     </SafeAreaView>
   );
@@ -128,10 +121,10 @@ const styles = StyleSheet.create({
     marginTop: responsiveScreenWidth(10),
   },
   hamBurger: {
-    paddingHorizontal: responsiveScreenWidth(3.5)
+    paddingHorizontal: responsiveScreenWidth(3.5),
   },
   headerItems: {
-    gap: responsiveHeight(2)
+    gap: responsiveHeight(2),
   },
   steps: {
     fontSize: responsiveScreenFontSize(1.9),
@@ -140,15 +133,12 @@ const styles = StyleSheet.create({
   basicDetails: {
     paddingHorizontal: responsiveScreenWidth(5),
     gap: responsiveHeight(4),
-    
   },
   basicDetailsText: {
     fontSize: responsiveFontSize(3.8),
     fontWeight: 'bold',
   },
-    main: {
-    
-    },
+  main: {},
   propertyTYpe: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -160,10 +150,18 @@ const styles = StyleSheet.create({
     padding: responsiveScreenWidth(2),
     borderRadius: responsiveWidth(20),
   },
-  
+
   typeColor: {
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
     borderWidth: responsiveWidth(0.3),
     borderColor: '#8BC83F',
+    padding: responsiveScreenWidth(2),
+    borderRadius: responsiveWidth(20),
+  },
+  noTypeColor: {
+    alignSelf: 'flex-start',
+    borderWidth: responsiveWidth(0.1),
     padding: responsiveScreenWidth(2),
     borderRadius: responsiveWidth(20),
   },
@@ -190,5 +188,10 @@ const styles = StyleSheet.create({
     borderRadius: responsiveWidth(18),
     borderColor: '#8BC83F',
     padding: 8,
+  },
+  typeOfProperty: {
+   
+    marginTop: responsiveScreenHeight(2),
+    gap: responsiveHeight(1),
   },
 });
