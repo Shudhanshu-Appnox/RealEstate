@@ -25,10 +25,25 @@ const PostProperty = () => {
   const [areaType, setAreaType] = useState<string>('residential');
   const [lookingTo, setLookingTo] = useState<string>('Sell');
   const [propertyType, setPropertyType] = useState<string>('');
+  const [errorProperty, setErrorProperty] = useState<string>('');
+ 
   const navigation = useNavigation();
 
+  const validate = () => {
+      if(!propertyType) {
+        setErrorProperty('Please select property');
+        return false
+      } else {
+        setErrorProperty('');
+        return true;
+      }
+  }
   const handleNext = () => {
-    navigation.navigate('PostPropertySecond' as never);
+    const isValid = validate();
+    if(isValid) {
+      navigation.navigate('PostPropertySecond' as never);
+    }
+    
   };
   const LookingOption = ['Sell', 'Rent / Lease'];
   const WhatKindOfProperty = ['residential', 'commercial'];
@@ -105,8 +120,11 @@ const PostProperty = () => {
               ))}
             </View>
           </View>
-
-          <ExploreButton onPress={() => handleNext()} title="Next" />
+         {errorProperty ? <Text style={{color: 'red'}}>{errorProperty}</Text> : null}
+         
+        </View>
+        <View style={styles.bottomBtn}>
+        <ExploreButton onPress={() => handleNext()} title="Next" />
         </View>
       </View>
     </SafeAreaView>
@@ -124,6 +142,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: responsiveScreenWidth(3.5),
   },
   headerItems: {
+    flex: 1,
     gap: responsiveHeight(2),
   },
   steps: {
@@ -131,6 +150,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   basicDetails: {
+    flex: 1,
     paddingHorizontal: responsiveScreenWidth(5),
     gap: responsiveHeight(4),
   },
@@ -143,6 +163,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: responsiveScreenHeight(2),
+    paddingBottom: responsiveScreenWidth(7),
     gap: responsiveScreenWidth(7),
   },
   residential: {
@@ -169,7 +190,8 @@ const styles = StyleSheet.create({
     paddingTop: responsiveScreenHeight(2),
   },
   lookingTo: {
-    paddingVertical: responsiveScreenHeight(1.8),
+    paddingVertical: responsiveScreenHeight(1.5),
+    paddingBottom: responsiveScreenWidth(7),
     flexDirection: 'row',
     gap: responsiveScreenWidth(2),
   },
@@ -190,8 +212,11 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   typeOfProperty: {
-   
     marginTop: responsiveScreenHeight(2),
     gap: responsiveHeight(1),
   },
+  bottomBtn: {
+    paddingHorizontal: responsiveScreenWidth(5),
+    paddingVertical: responsiveScreenHeight(2)
+  }
 });

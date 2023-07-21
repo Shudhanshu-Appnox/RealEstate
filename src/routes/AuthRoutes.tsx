@@ -19,6 +19,9 @@ import RenderSearchResult from '../component/homepages/Search/RenderSearchResult
 import FallBackSearch from '../component/homepages/Search/FallBackSearch';
 import PostProperty from '../screens/homepage/PostProperty/PostProperty';
 import PostPropertySecond from '../screens/homepage/PostProperty/PostPropertySecond';
+import PostPropertyThird from '../screens/homepage/PostProperty/PostPropertyThird';
+import PropertyDetail from '../screens/homepage/PostProperty/PropertyFeatures';
+import PropertyFeatures from '../screens/homepage/PostProperty/PropertyFeatures';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +46,16 @@ const AuthRoute = () => {
       <Stack.Screen
         name="PostPropertySecond"
         component={PostPropertySecond}
+        options={{headerShown: false,}}
+      />
+       <Stack.Screen
+        name="PostPropertyThird"
+        component={PostPropertyThird}
+        options={{headerShown: false,}}
+      />
+      <Stack.Screen
+        name="PropertyFeatures"
+        component={PropertyFeatures}
         options={{headerShown: false,}}
       />
       <Stack.Screen

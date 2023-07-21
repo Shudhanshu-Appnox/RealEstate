@@ -26,6 +26,10 @@ const PostPropertySecond = () => {
   const [noOfRooms, setNoOfRooms] = useState('');
   const [noOfBathRooms, setNoOfBathRooms] = useState('');
   const [noOfBalconies, setNoOfBalconies] = useState('');
+  // const [availability, setAvailability] = useState('');
+  const [noOfBedroomsError, setNoOfBedroomsError] = useState('');
+  const [noOfBathroomsError, setNoOfBathroomsError] = useState('');
+  const [noOfBalconiesError, setNoOfBalconiesError] = useState('');
   const dispatch = useDispatch();
   const handleCityName = () => {
     dispatch(UpdateCityName(''));
@@ -35,24 +39,54 @@ const PostPropertySecond = () => {
   const {cityName} = useSelector((store: any) => store.filter);
 
   const NoOfRooms = ['1', '2', '3', '4', '5', '5+'];
-  const NoOfBathRooms = ['1', '2', '3', '4+',];
-  const NoOfBalconies = ['1', '2', '3', 'More than 3',];
-
-  const handleNext = () => {
-    navigation.navigate('PostPropertyThird' as never)
+  const NoOfBathRooms = ['1', '2', '3', '4+'];
+  const NoOfBalconies = ['1', '2', '3', 'More than 3'];
+  // const availability = ['readyToMove', 'Under Construction'];
+  const validate = () => {
+    if(!noOfRooms) {
+      setNoOfBedroomsError('Please select property');
+      setNoOfBathroomsError('');
+      setNoOfBalconiesError('')
+      return false;
+    } else if(!noOfBathRooms){
+      
+      setNoOfBedroomsError('');
+      setNoOfBathroomsError('Please select bathrooms');
+      setNoOfBalconiesError('');
+      return false;
+    } else if(!noOfBalconies) {
+      setNoOfBedroomsError('');
+      setNoOfBathroomsError('');
+      setNoOfBalconiesError('Please select balconies');
+      return false;
+    } else { 
+      setNoOfBedroomsError('');
+      setNoOfBathroomsError('');
+      setNoOfBalconiesError('');
+      return true;
+    }
+}
+const handleNext = () => {
+  const isValid = validate();
+  if(isValid) {
+    navigation.navigate('PostPropertyThird' as never);
   }
+  
+};
+
+  
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <View style={styles.container}>
-        <View style={styles.buttonBack}>
-          <HeaderWithBackBtn />
-        </View>
-        <View style={styles.headerText}>
-          <Text style={styles.steps}>Step 2 of 3</Text>
-          <Text style={styles.basicDetailsText}>Add Basic Details</Text>
-          <Text>Your Intent, Property type & Contact details</Text>
-        </View>
-        <View>
+        <View style={styles.innerContainer}>
+          <View style={styles.buttonBack}>
+            <HeaderWithBackBtn />
+          </View>
+          <View style={styles.headerText}>
+            <Text style={styles.steps}>Step 2 of 3</Text>
+            <Text style={styles.basicDetailsText}>Property Details</Text>
+          </View>
+
           <Text style={styles.locatedText}>Where is it located ?</Text>
           <View style={styles.addCityNameContainer}>
             <TouchableOpacity
@@ -72,7 +106,7 @@ const PostPropertySecond = () => {
             ) : null}
           </View>
         </View>
-        <View>
+        <View style={{flex: 4}}>
           <Text style={styles.locatedText}>Add Rooms Details</Text>
           <Text style={styles.noOfBedroomsText}>No. of bedrooms</Text>
           <View style={styles.noOfBedrooms}>
@@ -82,9 +116,7 @@ const PostPropertySecond = () => {
                 label={option}
                 btnPressHandler={setNoOfRooms}
                 style={
-                  noOfRooms === option
-                    ? styles.colored
-                    : styles.notColored
+                  noOfRooms === option ? styles.colored : styles.notColored
                 }
               />
             ))}
@@ -97,9 +129,7 @@ const PostPropertySecond = () => {
                 label={option}
                 btnPressHandler={setNoOfBathRooms}
                 style={
-                  noOfBathRooms === option
-                    ? styles.colored
-                    : styles.notColored
+                  noOfBathRooms === option ? styles.colored : styles.notColored
                 }
               />
             ))}
@@ -112,16 +142,31 @@ const PostPropertySecond = () => {
                 label={option}
                 btnPressHandler={setNoOfBalconies}
                 style={
-                  noOfBalconies === option
+                  noOfBalconies === option ? styles.colored : styles.notColored
+                }
+              />
+            ))}
+          </View>
+          <View>
+            {/* <Text style={styles.noOfBedroomsText}>Availability</Text>
+          <View style={styles.noOfBedrooms}>
+            {availability.map(option => (
+              <OptionBtn
+                key={option}
+                label={option}
+                btnPressHandler={setAvailability}
+                style={
+                  availability === option
                     ? styles.colored
                     : styles.notColored
                 }
               />
             ))}
+          </View> */}
           </View>
-         <View style={{marginTop: responsiveHeight(3)}}>
-         <ExploreButton onPress={() => handleNext()} title='Next'/>
-         </View>
+        </View>
+        <View style={styles.bottomBtn}>
+          <ExploreButton onPress={() => handleNext()} title="Next" />
         </View>
       </View>
     </SafeAreaView>
@@ -132,14 +177,17 @@ export default PostPropertySecond;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     marginHorizontal: responsiveScreenWidth(4),
-    gap: responsiveHeight(3),
+  },
+  innerContainer: {
+    flex: 3,
   },
   buttonBack: {
     marginBottom: responsiveScreenHeight(6),
   },
   headerText: {
-    gap: responsiveHeight(2)
+    gap: responsiveHeight(2),
   },
   steps: {
     fontSize: responsiveScreenFontSize(1.9),
@@ -150,7 +198,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   locatedText: {
-    
+    marginBottom: responsiveHeight(4)
   },
   addCityNameContainer: {
     flexDirection: 'row',
@@ -190,7 +238,7 @@ const styles = StyleSheet.create({
     borderRadius: responsiveWidth(20),
     borderColor: 'gray',
     paddingHorizontal: responsiveWidth(5),
-    paddingVertical: responsiveScreenHeight(1.9)
+    paddingVertical: responsiveScreenHeight(1.9),
   },
   colored: {
     alignSelf: 'flex-start',
@@ -198,14 +246,17 @@ const styles = StyleSheet.create({
     borderRadius: responsiveWidth(20),
     borderColor: '#8BC83F',
     paddingHorizontal: responsiveWidth(5),
-    paddingVertical: responsiveScreenHeight(1.9)
+    paddingVertical: responsiveScreenHeight(1.9),
   },
   noOfBedroomsText: {
-    marginVertical: responsiveScreenHeight(2)
+    marginVertical: responsiveScreenHeight(2),
   },
   noOfBedrooms: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: responsiveWidth(3)
+    gap: responsiveWidth(3),
+  },
+  bottomBtn: {
+    paddingVertical: responsiveScreenHeight(2),
   },
 });
