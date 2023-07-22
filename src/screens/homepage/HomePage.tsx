@@ -30,7 +30,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const HomePage = () => {
   const notificationImg = require('../../../assets/images/Notification.png');
-  const ellipseImg = require('../../../assets/images/Ellipse.png');
   const searchImg = require('../../../assets/images/Search.png');
 
   const navigation = useNavigation();
@@ -161,12 +160,12 @@ const styles = StyleSheet.create({
   },
   postProperty: {
     backgroundColor: '#234F68',
-    padding: responsiveHeight(1),
+    padding: responsiveHeight(1.6),
     borderRadius: responsiveWidth(10),
   },
   postPropertyText: {
+    fontSize: responsiveFontSize(2),
     color: 'white',
-    fontWeight: 'bold',
   },
 
   notification: {

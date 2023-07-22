@@ -22,6 +22,7 @@ import PostPropertySecond from '../screens/homepage/PostProperty/PostPropertySec
 import PostPropertyThird from '../screens/homepage/PostProperty/PostPropertyThird';
 import PropertyDetail from '../screens/homepage/PostProperty/PropertyFeatures';
 import PropertyFeatures from '../screens/homepage/PostProperty/PropertyFeatures';
+import CommunicationSetting from '../component/common/Card/CommunicationSetting';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,11 @@ const AuthRoute = () => {
       <Stack.Screen
         name="Notification"
         component={Notification}
+        options={{headerShown: false,}}
+      />
+      <Stack.Screen
+        name="CommunicationSetting"
+        component={CommunicationSetting}
         options={{headerShown: false,}}
       />
       <Stack.Screen
