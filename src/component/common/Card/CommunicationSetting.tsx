@@ -1,4 +1,4 @@
-import {SafeAreaView, StyleSheet, Switch, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {
   responsiveFontSize,
@@ -8,6 +8,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import HeaderWithBackBtn from '../buttons/HeaderWithBackBtn';
+import CustomSwitchBtn from '../buttons/CustomSwitchBtn';
 
 const CommunicationSetting = () => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -23,33 +24,27 @@ const CommunicationSetting = () => {
         </View>
         <View style={styles.body}>
           <View style={styles.bodyFirst}>
-            <View>
+            <View style={{width: '85%'}}>
               <Text style={styles.headerText}>Property recommendations</Text>
               <Text>Curated properties based on your interests</Text>
             </View>
             <View style={styles.switchContainer1}>
-              <Switch
-                trackColor={{false: '#F5F4F8', true: '#3F9F98'}}
-                thumbColor={isEnabled ? '#8BC83F' : '#f4f3f4'}
-                // ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
+              <CustomSwitchBtn
+                onValueChange={toggleSwitch} trackColor={{
+                  false: '#F5F4F8', true: '#3F9F98'
+                }} thumbColor={isEnabled ? '#8BC83F' : '#f4f3f4'} value={isEnabled}              />
             </View>
           </View>
           <View style={styles.bodySecond}>
-            <View>
+            <View style={{width: '85%'}}>
               <Text style={styles.headerText}>Project recommendations</Text>
               <Text>Curated projects based on your interests</Text>
             </View>
-            <View style={styles.switchContainer2}>
-              <Switch 
-                trackColor={{false: '#F5F4F8', true: '#3F9F98'}}
-                thumbColor={isEnabled ? '#8BC83F' : '#f4f3f4'}
-                // ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
+            <View style={styles.switchContainer1}>
+              <CustomSwitchBtn
+                onValueChange={toggleSwitch} trackColor={{
+                  false: '#F5F4F8', true: '#3F9F98'
+                }} thumbColor={isEnabled ? '#8BC83F' : '#f4f3f4'} value={isEnabled}              />
             </View>
           </View>
         </View>
@@ -76,17 +71,17 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     marginTop: responsiveHeight(5),
-    gap: responsiveScreenHeight(5)
+    gap: responsiveScreenHeight(5),
   },
   bodyFirst: {
     flexDirection: 'row',
   },
   bodySecond: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   headerText: {
     fontSize: responsiveFontSize(2.3),
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   switchContainer1: {
     flex: 1,
@@ -97,6 +92,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: responsiveWidth(5)
-  }
+    marginLeft: responsiveWidth(5),
+  },
 });
