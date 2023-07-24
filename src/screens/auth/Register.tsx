@@ -113,6 +113,19 @@ export default function Register() {
     }
   };
 
+  const OnHandleChangeEmail = (value: string | any []) => {
+    if(!value.length) {
+      setEmailValidError('Required')
+      return false;
+    } else if (!EMAIL_REGEX.test(email)) {
+      setEmailValidError('Enter valid Email !');
+      return false;
+    } else {
+      setEmailValidError('');
+      return true;
+    }
+}
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>
@@ -158,6 +171,7 @@ export default function Register() {
               autoCorrect={false}
               autoCapitalize="none"
               onChangeText={value => {
+                OnHandleChangeEmail(value)
                 setEmail(value);
               }}
               onFocus={() => setIsFocus(true)}

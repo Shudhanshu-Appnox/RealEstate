@@ -18,6 +18,7 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
+import {UpdateNewListing} from '../../../redux/reducers/postReducer';
 import {UpdateCityName} from '../../../redux/reducers/filterReducer';
 import OptionBtn from '../../../component/common/buttons/OptionBtn';
 import ExploreButton from '../../../component/common/buttons/ExploreButton';
@@ -25,56 +26,87 @@ import ExploreButton from '../../../component/common/buttons/ExploreButton';
 const PostPropertySecond = () => {
   const [noOfRooms, setNoOfRooms] = useState('');
   const [noOfBathRooms, setNoOfBathRooms] = useState('');
-  const [noOfBalconies, setNoOfBalconies] = useState('');
-  // const [availability, setAvailability] = useState('');
+
+  const {newListing} = useSelector((store: any) => store.post);
   const [noOfBedroomsError, setNoOfBedroomsError] = useState('');
   const [noOfBathroomsError, setNoOfBathroomsError] = useState('');
-  const [noOfBalconiesError, setNoOfBalconiesError] = useState('');
+  const [readyToMove, setReadyToMove] = useState('');
+  const [propertyStatus, setStatus] = useState('');
   const dispatch = useDispatch();
+
+  const navigation = useNavigation();
+  const {cityName} = useSelector((store: any) => store.filter);
   const handleCityName = () => {
     dispatch(UpdateCityName(''));
   };
 
-  const navigation = useNavigation();
-  const {cityName} = useSelector((store: any) => store.filter);
-
   const NoOfRooms = ['1', '2', '3', '4', '5', '5+'];
   const NoOfBathRooms = ['1', '2', '3', '4+'];
-  const NoOfBalconies = ['1', '2', '3', 'More than 3'];
-  // const availability = ['readyToMove', 'Under Construction'];
+  const yesNo = ['Yes', 'No'];
+  const status = ['available', 'rented', 'booked'];
+
   const validate = () => {
-    if(!noOfRooms) {
-      setNoOfBedroomsError('Please select property');
+    if (!noOfRooms) {
+      setNoOfBedroomsError('Please select bedrooms !');
       setNoOfBathroomsError('');
-      setNoOfBalconiesError('')
       return false;
-    } else if(!noOfBathRooms){
-      
+    } else if (!noOfBathRooms) {
       setNoOfBedroomsError('');
-      setNoOfBathroomsError('Please select bathrooms');
-      setNoOfBalconiesError('');
+      setNoOfBathroomsError('Please select bathrooms !');
       return false;
-    } else if(!noOfBalconies) {
+    } else {
       setNoOfBedroomsError('');
       setNoOfBathroomsError('');
-      setNoOfBalconiesError('Please select balconies');
-      return false;
-    } else { 
-      setNoOfBedroomsError('');
-      setNoOfBathroomsError('');
-      setNoOfBalconiesError('');
       return true;
     }
-}
-const handleNext = () => {
-  const isValid = validate();
-  if(isValid) {
-    navigation.navigate('PostPropertyThird' as never);
-  }
-  
-};
+  };
 
-  
+  const setNoOfRoomsHandel = (params: any) => {
+    setNoOfRooms(params);
+    dispatch(
+      UpdateNewListing({
+        key: 'bedrooms',
+        value: params,
+      }),
+    );
+  };
+  const setNoOfBathRoomsHandel = (params: any) => {
+    setNoOfBathRooms(params);
+    dispatch(
+      UpdateNewListing({
+        key: 'bathrooms',
+        value: params,
+      }),
+    );
+  };
+
+  const setReadyToMoveHandel = (params: any) => {
+    setReadyToMove(params);
+    dispatch(
+      UpdateNewListing({
+        key: 'readyToMove',
+        value: params,
+      }),
+    );
+  };
+
+  const setPropertyStatusHandel = (params: any) => {
+    setStatus(params);
+    dispatch(
+      UpdateNewListing({
+        key: 'status',
+        value: params,
+      }),
+    );
+  };
+
+  const handleNext = () => {
+    const isValid = validate();
+    if (isValid) {
+      navigation.navigate('PostPropertyThird' as never);
+    }
+  };
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <View style={styles.container}>
@@ -90,7 +122,9 @@ const handleNext = () => {
           <Text style={styles.locatedText}>Where is it located ?</Text>
           <View style={styles.addCityNameContainer}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('AddCityName' as never)}
+              onPress={() => {
+                navigation.navigate('AddCityName' as never);
+              }}
               style={styles.addCityName}>
               <Text>City</Text>
               <Ionicons style={styles.addFont} name={'add'} />
@@ -106,63 +140,72 @@ const handleNext = () => {
             ) : null}
           </View>
         </View>
-        <View style={{flex: 4}}>
+        <View>
           <Text style={styles.locatedText}>Add Rooms Details</Text>
-          <Text style={styles.noOfBedroomsText}>No. of bedrooms</Text>
+          <Text style={styles.noOfBedroomsText}>No. of bedrooms ?</Text>
+          {noOfBedroomsError ? (
+            <Text style={{color: 'red'}}>{noOfBedroomsError}</Text>
+          ) : null}
           <View style={styles.noOfBedrooms}>
             {NoOfRooms.map(option => (
               <OptionBtn
                 key={option}
                 label={option}
-                btnPressHandler={setNoOfRooms}
+                btnPressHandler={setNoOfRoomsHandel}
                 style={
                   noOfRooms === option ? styles.colored : styles.notColored
                 }
               />
             ))}
           </View>
-          <Text style={styles.noOfBedroomsText}>No. of Bathrooms</Text>
+          <Text style={styles.noOfBedroomsText}>No. of Bathrooms ?</Text>
+          {noOfBathroomsError ? (
+            <Text style={{color: 'red'}}>{noOfBathroomsError}</Text>
+          ) : null}
           <View style={styles.noOfBedrooms}>
             {NoOfBathRooms.map(option => (
               <OptionBtn
                 key={option}
                 label={option}
-                btnPressHandler={setNoOfBathRooms}
+                btnPressHandler={setNoOfBathRoomsHandel}
                 style={
                   noOfBathRooms === option ? styles.colored : styles.notColored
                 }
               />
             ))}
           </View>
-          <Text style={styles.noOfBedroomsText}>No. of Balconies</Text>
-          <View style={styles.noOfBedrooms}>
-            {NoOfBalconies.map(option => (
-              <OptionBtn
-                key={option}
-                label={option}
-                btnPressHandler={setNoOfBalconies}
-                style={
-                  noOfBalconies === option ? styles.colored : styles.notColored
-                }
-              />
-            ))}
+
+          <View style={styles.readyToMove}>
+            <Text>Looking for "ReadytoMove" properties ? </Text>
+            <View style={{flexDirection: 'row', gap: responsiveWidth(5)}}>
+              {yesNo.map(option => (
+                <OptionBtn
+                  key={option}
+                  label={option}
+                  btnPressHandler={setReadyToMoveHandel}
+                  style={
+                    readyToMove === option ? styles.colored : styles.notColored
+                  }
+                />
+              ))}
+            </View>
           </View>
-          <View>
-            {/* <Text style={styles.noOfBedroomsText}>Availability</Text>
-          <View style={styles.noOfBedrooms}>
-            {availability.map(option => (
-              <OptionBtn
-                key={option}
-                label={option}
-                btnPressHandler={setAvailability}
-                style={
-                  availability === option
-                    ? styles.colored
-                    : styles.notColored
-                }
-              />
-            ))}
-          </View> */}
+          <View style={styles.status}>
+            <Text style={{marginBottom: responsiveScreenHeight(1)}}>Properties Status ? </Text>
+            <View style={{flexDirection: 'row', gap: responsiveWidth(5)}}>
+              {status.map(option => (
+                <OptionBtn
+                  key={option}
+                  label={option}
+                  btnPressHandler={setPropertyStatusHandel}
+                  style={
+                    propertyStatus === option
+                      ? styles.colored
+                      : styles.notColored
+                  }
+                />
+              ))}
+            </View>
           </View>
         </View>
         <View style={styles.bottomBtn}>
@@ -176,18 +219,17 @@ const handleNext = () => {
 export default PostPropertySecond;
 
 const styles = StyleSheet.create({
+
+  headerText:{},
   container: {
     flex: 1,
     marginHorizontal: responsiveScreenWidth(4),
   },
   innerContainer: {
-    flex: 3,
+    
   },
   buttonBack: {
     marginBottom: responsiveScreenHeight(6),
-  },
-  headerText: {
-    gap: responsiveHeight(2),
   },
   steps: {
     fontSize: responsiveScreenFontSize(1.9),
@@ -198,7 +240,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   locatedText: {
-    marginBottom: responsiveHeight(4)
+    marginTop: responsiveHeight(3),
+    fontSize: responsiveFontSize(2.5),
+    fontWeight: '600',
   },
   addCityNameContainer: {
     flexDirection: 'row',
@@ -259,4 +303,21 @@ const styles = StyleSheet.create({
   bottomBtn: {
     paddingVertical: responsiveScreenHeight(2),
   },
+  readyToMove: {
+    paddingVertical: responsiveScreenHeight(3),
+    gap: responsiveHeight(1),
+  },
+  yes: {
+    borderWidth: responsiveWidth(0.3),
+    borderRadius: responsiveWidth(4),
+    borderColor: '#8BC83F',
+    padding: responsiveWidth(2),
+  },
+  no: {
+    borderWidth: responsiveWidth(0.3),
+    borderRadius: responsiveWidth(4),
+    borderColor: 'gray',
+    padding: responsiveWidth(2),
+  },
+  status: {},
 });

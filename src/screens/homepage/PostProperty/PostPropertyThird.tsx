@@ -19,14 +19,62 @@ import {
 } from 'react-native-responsive-dimensions';
 import CustomTextInput from '../../../component/common/inputs/inputComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useDispatch, useSelector} from 'react-redux';
+import { UpdateNewListing } from '../../../redux/reducers/postReducer';
+
+
 
 const PostPropertyThird = () => {
-  const navigation = useNavigation();
-  const [text, setText] = useState('');
 
+
+
+  const REGEX_NUMBER = /^\d*$/;
+  const navigation = useNavigation();
+  const [price, setPrice] = useState('');
+  const [priceError, setPriceError] = useState('')
+  const [text, setText] = useState('');
+  const [textError, setTextError] = useState('');
+  const {newListing} = useSelector((store: any) => store.post);
+  const dispatch = useDispatch();
+  
+  const validate = () => {
+    if(!text.length) {
+      setPriceError('Required!');
+      return false;
+    } else if (!REGEX_NUMBER.test(price)) {
+      setPriceError('Enter valid number!');
+      return false;
+    } else {
+      setPriceError('');
+      return true;
+    }
+  }
+ 
   const handleNext = () => {
-    navigation.navigate('PropertyFeatures' as never);
+    const isValid = validate()
+    if(isValid) {
+      navigation.navigate('PropertyFeatures' as never)
+    }
   };
+
+
+  const setPriceHandel = (params: any) => {
+    setPrice(params);
+    dispatch(UpdateNewListing({
+      key: 'price', value: params
+    }))
+  }
+
+  const setTitleHandel = (params: string) => {
+    setText(params);
+    dispatch(UpdateNewListing({
+      key: "title", 
+      value: params
+    }))
+  }
+
+ 
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.container}>
@@ -50,11 +98,22 @@ const PostPropertyThird = () => {
           <View style={styles.inputContainer}>
             <Text>Pricing Details</Text>
             <CustomTextInput
-              onChangeText={setText}
-              value={text}
+              onChangeText={setPriceHandel}
+              value={price}
               placeholder="Enter expected price"
             />
+            {priceError ? <Text style={{color: 'red'}}>{priceError}</Text> : null}
           </View>
+          <View style={styles.inputContainer1}>
+            <Text>Title</Text>
+            <CustomTextInput
+              onChangeText={setTitleHandel}
+              value={text}
+              placeholder="title"
+            />
+            
+          </View>
+          
         </View>
         <View style={styles.bottomBtn}>
           <ExploreButton onPress={() => handleNext()} title="Next" />
@@ -105,7 +164,10 @@ const styles = StyleSheet.create({
     color: '#8BC83F',
   },
   inputContainer: {
-    marginVertical: responsiveScreenHeight(3),
+
+  },
+  inputContainer1: {
+    marginBottom: responsiveScreenHeight(3),
   },
   bottomBtn: {
     paddingVertical: responsiveScreenHeight(2),

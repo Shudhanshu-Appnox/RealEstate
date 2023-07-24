@@ -18,7 +18,7 @@ import {
   responsiveScreenWidth,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import HeaderWithBackBtn from '../../../component/common/buttons/HeaderWithBackBtn';
+
 import {useNavigation} from '@react-navigation/native';
 import BackWithSetting from '../../../component/common/buttons/BackWithSetting';
 

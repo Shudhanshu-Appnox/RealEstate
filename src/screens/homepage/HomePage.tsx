@@ -43,6 +43,7 @@ const HomePage = () => {
           <TouchableOpacity onPress={() => setModalOpen(false)}>
             <Ionicons name="close" size={responsiveWidth(10)} />
           </TouchableOpacity>
+          <Text>Hello Modal</Text>
         </View>
       </Modal>
       <View style={styles.headerItems}>

@@ -7,7 +7,9 @@ import Lottie from 'lottie-react-native';
 import { useDispatch } from 'react-redux';
 import { UpdateIsLoginState } from '../../redux/reducers/userReducer';
 
-const SuccessPage = () => {
+const SuccessPage = ({route} : any) => {
+  const { title } = route.params;
+  console.log(title)
     const dispatch = useDispatch();
     const logo = require('../../../assets/images/Maskgroup.png');
     const animationSuccess = require('../../../assets/Animation/Animation_1689673992744.json');
@@ -20,7 +22,7 @@ const SuccessPage = () => {
      <View style={styles.container}>
       <Image style={styles.imageLogo} source={logo} />
       <Text style={styles.text}>
-        You have successfully signup
+        You have successfully {title}
       </Text>
       <Lottie style={styles.lottieAnimation} source={animationSuccess} autoPlay loop />
       <Text style={styles.text}>Success</Text>

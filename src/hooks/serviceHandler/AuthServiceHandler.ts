@@ -37,7 +37,7 @@ const useAuthServiceHandler = () => {
       if (typeof result === 'string') {
         Navigation.navigate('Register' as never);
       } else {
-        Navigation.navigate('SuccessPage' as never);
+        Navigation.navigate('SuccessPage' as never, {title : "Login"});
       }
     } catch (error: any) {
       Alert.alert('Wrong OTP');
@@ -67,6 +67,8 @@ const useAuthServiceHandler = () => {
       Alert.alert('Error', error.response.data.error.message);
     }
   };
+
+  
 
   return {
     GenerateOtpServiceHandler,

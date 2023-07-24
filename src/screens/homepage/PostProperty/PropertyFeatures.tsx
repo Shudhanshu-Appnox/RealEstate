@@ -9,42 +9,64 @@ import {
 import CustomTextInput from '../../../component/common/inputs/inputComponent';
 import ExploreButton from '../../../component/common/buttons/ExploreButton';
 import HeaderWithBackBtn from '../../../component/common/buttons/HeaderWithBackBtn';
+import { useDispatch, useSelector } from 'react-redux';
+import { UpdateNewListing } from '../../../redux/reducers/postReducer';
+import usePropertyHook from '../../../hooks/PropertyHook';
+
 
 const PropertyFeatures = () => {
-  const [text, setText] = useState('');
+  const [longitude, setLongitude] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const {createPropertyHandler} = usePropertyHook()
+  const {newListing} = useSelector((store: any) => store.post);
+  const dispatch = useDispatch();
+  const handelPost = () => {
+    createPropertyHandler(newListing)
+  }
+
+  const latitudeHandel = (params: any) => {
+    setLatitude(params);
+    dispatch(UpdateNewListing({
+      key: 'latitude', value: params
+    }))
+  }
+
+  const longitudeHandel = (params: any) => {
+    setLongitude(params);
+    dispatch(UpdateNewListing({
+      key: 'longitude', value: params
+    }))
+  }
+
+  
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.container}>
         <View style={styles.backButtonHeader}>
           <HeaderWithBackBtn />
         </View>
-        <Text style={styles.textHeader}>
-          Tell us the Top 4 unique property features
-        </Text>
+       
         <View style={styles.inputContainer}>
-          <CustomTextInput
-            onChangeText={setText}
-            value={text}
-            placeholder="Feature 1"
-          />
-          <CustomTextInput
-            onChangeText={setText}
-            value={text}
-            placeholder="Feature 2"
-          />
-          <CustomTextInput
-            onChangeText={setText}
-            value={text}
-            placeholder="Feature 3"
-          />
-          <CustomTextInput
-            onChangeText={setText}
-            value={text}
-            placeholder="Feature 4"
-          />
-        </View>
+            <Text>latitude</Text>
+            <CustomTextInput
+              onChangeText={latitudeHandel}
+              value={latitude}
+              placeholder="latitude"
+            />
+            
+          </View>
+          <View style={styles.inputContainer}>
+            <Text>longitude</Text>
+            <CustomTextInput
+              onChangeText={longitudeHandel}
+              value={longitude}
+              placeholder="longitude"
+            />
+            
+          </View>
         <View>
-          <ExploreButton title="Confirm and post property" />
+          <ExploreButton onPress={() => handelPost()} title="Confirm and post property" />
         </View>
       </View>
     </SafeAreaView>
@@ -66,7 +88,5 @@ const styles = StyleSheet.create({
   textHeader: {
     fontSize: responsiveWidth(7),
   },
-  inputContainer: {
-    flex:1,
-  },
+  inputContainer: {}
 });

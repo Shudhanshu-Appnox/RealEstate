@@ -19,13 +19,37 @@ import {
 import ExploreButton from '../../../component/common/buttons/ExploreButton';
 import {useNavigation} from '@react-navigation/native';
 import OptionBtn from '../../../component/common/buttons/OptionBtn';
+import { useDispatch, useSelector } from 'react-redux';
+import { UpdateNewListing } from '../../../redux/reducers/postReducer';
 
 const PostProperty = () => {
+  const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
   const [areaType, setAreaType] = useState<string>('residential');
+  const {newListing} = useSelector((store: any) => store.post);
   const [lookingTo, setLookingTo] = useState<string>('Sell');
   const [propertyType, setPropertyType] = useState<string>('');
   const [errorProperty, setErrorProperty] = useState<string>('');
+
+  const setLookingBtnHandler = (params : string) => {
+    setLookingTo(params);
+    dispatch(UpdateNewListing({
+      key: "lookingTo" , value: params
+    }))
+  }
+  const setWhatKindPropertyHandler = (params: string) => {
+    setAreaType(params);
+    dispatch(UpdateNewListing({
+      key: "type" , value: params
+    }))
+  }
+  const setPropertyTypeHandler = (params: string) => {
+    setPropertyType(params);
+    dispatch(UpdateNewListing({
+      key: "propertyType" , value: params
+    }))
+  }
+ 
  
   const navigation = useNavigation();
 
@@ -54,6 +78,9 @@ const PostProperty = () => {
     'Plot/Land',
     '1 RK/ Studio Aprtment',
   ];
+
+  console.log('newListing', newListing);
+  
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <Modal visible={modalOpen} animationType="slide">
@@ -82,7 +109,7 @@ const PostProperty = () => {
                 <OptionBtn
                   key={option}
                   label={option}
-                  btnPressHandler={setLookingTo}
+                  btnPressHandler={setLookingBtnHandler}
                   style={
                     lookingTo === option
                       ? styles.pressedSellrent
@@ -97,7 +124,7 @@ const PostProperty = () => {
                 <OptionBtn
                   key={option}
                   label={option}
-                  btnPressHandler={setAreaType}
+                  btnPressHandler={setWhatKindPropertyHandler}
                   style={
                     areaType === option ? styles.typeColor : styles.residential
                   }
@@ -110,7 +137,7 @@ const PostProperty = () => {
                 <OptionBtn
                   key={option}
                   label={option}
-                  btnPressHandler={setPropertyType}
+                  btnPressHandler={setPropertyTypeHandler}
                   style={
                     propertyType === option
                       ? styles.typeColor
@@ -123,6 +150,7 @@ const PostProperty = () => {
          {errorProperty ? <Text style={{color: 'red'}}>{errorProperty}</Text> : null}
          
         </View>
+        
         <View style={styles.bottomBtn}>
         <ExploreButton onPress={() => handleNext()} title="Next" />
         </View>
@@ -200,9 +228,9 @@ const styles = StyleSheet.create({
     borderColor: '#8BC83F',
   },
   Sellrent: {
-    borderWidth: responsiveWidth(0.3),
+    borderWidth: responsiveWidth(0.2),
     borderRadius: responsiveWidth(18),
-    borderColor: 'white',
+    borderColor: 'gray',
     padding: 8,
   },
   pressedSellrent: {

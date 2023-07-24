@@ -51,7 +51,7 @@ const CategoryEstate: React.FC<props> = ({cityData}) => {
   
   const Item = ({data}: any) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate('DetailedPage' as never, {data})}
+      onPress={() => navigation.navigate('DetailedPage' as never, {data :data})}
       style={styles.itemContainer}>
       <View style={styles.featuredCard} id={data.id}>
       <Text style={styles.detailesHeadertext}>{data.title}</Text>
